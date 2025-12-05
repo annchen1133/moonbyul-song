@@ -11,6 +11,7 @@
             --text-color: #ffffff;
             --highlight-color: #ffeb3b; /* 日文空耳顏色 (黃) */
             --eng-color: #69f0ae;       /* 英文拼音顏色 (螢光綠) */
+            --cheer-color: #ff80ab;     /* 應援喊聲顏色 (亮粉紅) */
             --box-border: #333;
             --sub-text: #888;
             --btn-border: #7c4dff;
@@ -23,6 +24,7 @@
             --text-color: #333333;
             --highlight-color: #d32f2f; /* 白天日文改用深紅色 */
             --eng-color: #2e7d32;       /* 白天英文改用深綠色 */
+            --cheer-color: #ff005d;     /* 白天應援色改用深粉紅 */
             --box-border: #ccc;
             --sub-text: #666;
             --btn-text: #333333;
@@ -34,10 +36,17 @@
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             margin: 0;
             padding: 20px;
-            padding-top: 130px; /* 為了不被頂部按鈕擋住，上方留白 */
+            padding-top: 180px; /* 增加頂部留白，因為控制列變高了 */
             line-height: 1.6;
             text-align: center;
-            transition: background-color 0.3s, color 0.3s; /* 平滑切換效果 */
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* 應援喊聲樣式 */
+        .cheer {
+            color: var(--cheer-color);
+            font-weight: 900;
+            text-shadow: 0 0 5px rgba(255, 64, 129, 0.3);
         }
 
         /* 固定在頂部的控制面板 */
@@ -52,25 +61,29 @@
             z-index: 100;
             box-shadow: 0 2px 10px rgba(0,0,0,0.3);
             transition: background-color 0.3s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px; /* 行距 */
         }
 
         h1 {
             color: #7c4dff; /* 文星伊紫色 */
-            margin: 0 0 10px 0;
+            margin: 0;
             font-size: 20px;
         }
 
-        /* 按鈕樣式 */
-        .btn-group {
+        /* 按鈕容器與樣式 */
+        .btn-row {
             display: flex;
-            justify-content: center;
             gap: 10px;
         }
+
         .btn {
             background: none;
             border: 1px solid var(--btn-border);
             color: var(--text-color);
-            padding: 5px 12px;
+            padding: 6px 16px;
             border-radius: 20px;
             cursor: pointer;
             font-size: 14px;
@@ -106,13 +119,13 @@
         .jp {
             font-size: 16px;
             color: var(--highlight-color);
-            display: block; /* 預設顯示日文 */
+            display: block;
         }
         .en {
             font-size: 15px;
             color: var(--eng-color);
-            display: none; /* 預設隱藏英文 */
-            font-family: 'Courier New', Courier, monospace; /* 英文用等寬字體比較好讀 */
+            display: none;
+            font-family: 'Courier New', Courier, monospace;
             font-weight: bold;
         }
 
@@ -128,6 +141,13 @@
             display: inline-block;
         }
 
+        .note {
+            font-size: 12px;
+            color: var(--cheer-color);
+            margin-top: 5px;
+            display: block;
+        }
+
         .footer {
             margin-top: 50px;
             font-size: 12px;
@@ -140,10 +160,14 @@
 
     <div class="controls">
         <h1>🌙 Moon Byul - S.O.S</h1>
-        <div class="btn-group">
-            <button class="btn" onclick="toggleTheme()">☀/🌙</button>
-            <button class="btn active" id="btn-jp" onclick="showLang('jp')">日文空耳</button>
-            <button class="btn" id="btn-en" onclick="showLang('en')">英文拼音</button>
+        
+        <div class="btn-row">
+            <button class="btn" onclick="toggleTheme()" style="width: 100%;">☀ / 🌙 切換模式</button>
+        </div>
+
+        <div class="btn-row">
+            <button class="btn active" id="btn-jp" onclick="showLang('jp')">日文</button>
+            <button class="btn" id="btn-en" onclick="showLang('en')">英文</button>
         </div>
     </div>
 
@@ -159,9 +183,9 @@
             <div class="en">Sumgyeowatdeon nae maeumi daeulkka?</div>
         </div>
         <div class="line-box">
-            <div class="kr">수많은 고민 끝 하루를 시작해</div>
-            <div class="jp">スマヌン コミン クッ ハルル シジャケ</div>
-            <div class="en">Sumaneun gomin kkeut harureul sijakhae</div>
+            <div class="kr">수많은 고민 끝 하루를 시작해 <span class="cheer">(우리랑 시작해)</span></div>
+            <div class="jp">スマヌン コミン クッ ハルル シジャケ <span class="cheer">(ウリラン シジャケ)</span></div>
+            <div class="en">Sumaneun gomin kkeut harureul sijakhae <span class="cheer">(Urirang sijakhae)</span></div>
         </div>
 
         <div class="section-title">Verse 2</div>
@@ -203,16 +227,17 @@
             <div class="en">Tto neoreul saenggakhago inneun geonde?</div>
         </div>
 
-        <div class="section-title">Chorus (重點!)</div>
+        <div class="section-title">Chorus</div>
         <div class="line-box">
-            <div class="kr">S! O! S! 어디에 있든 내가 갈게</div>
-            <div class="jp">S! O! S! オディエ イットゥン ネガ カルケ</div>
-            <div class="en">S! O! S! Eodie itdeun naega galge</div>
+            <div class="kr"><span class="cheer">S! O! S!</span> 어디에 있든 내가 갈게</div>
+            <div class="jp"><span class="cheer">S! O! S!</span> オディエ イットゥン ネガ カルケ</div>
+            <div class="en"><span class="cheer">S! O! S!</span> Eodie itdeun naega galge</div>
         </div>
         <div class="line-box">
-            <div class="kr">넌 내게 신호를 보내줘 (Wah)</div>
-            <div class="jp">ノン ネゲ シノルル ポネジョ (Wah)</div>
-            <div class="en">Neon naege sinhoreul bonaejwo (Wah)</div>
+            <div class="kr">넌 내게 신호를 보내줘 <span class="cheer">(Wah)</span></div>
+            <div class="jp">ノン ネゲ シノルル ポネジョ <span class="cheer">(Wah)</span></div>
+            <div class="en">Neon naege sinhoreul bonaejwo <span class="cheer">(Wah)</span></div>
+            <span class="note">⚠️ 應援棒向右甩 3 次</span>
         </div>
         <div class="line-box">
             <div class="kr">금방 너를 찾을 수 있게</div>
@@ -220,9 +245,9 @@
             <div class="en">Geumbang neoreul chajeul su itge</div>
         </div>
         <div class="line-box">
-            <div class="kr">대답해줘 Yes or Yes</div>
-            <div class="jp">テダペジョ Yes or Yes</div>
-            <div class="en">Daedaphaejwo Yes or Yes</div>
+            <div class="kr">대답해줘 <span class="cheer">Yes or Yes</span></div>
+            <div class="jp">テダペジョ <span class="cheer">Yes or Yes</span></div>
+            <div class="en">Daedaphaejwo <span class="cheer">Yes or Yes</span></div>
         </div>
         <div class="line-box">
             <div class="kr">더 늦기 전에 말해줄래</div>
@@ -230,14 +255,15 @@
             <div class="en">Deo neutgi jeone malhaejullae</div>
         </div>
         <div class="line-box">
-            <div class="kr">잠 못 드는 내게로 (Wah)</div>
-            <div class="jp">チャム モッ トゥヌン ネゲロ (Wah)</div>
-            <div class="en">Jam mot deuneun naegero (Wah)</div>
+            <div class="kr">잠 못 드는 내게로 <span class="cheer">(Wah)</span></div>
+            <div class="jp">チャム モッ トゥヌン ネゲロ <span class="cheer">(Wah)</span></div>
+            <div class="en">Jam mot deuneun naegero <span class="cheer">(Wah)</span></div>
+            <span class="note">⚠️ 應援棒向右甩 3 次</span>
         </div>
         <div class="line-box">
-            <div class="kr">내 마음은 또 S.O.S</div>
-            <div class="jp">ネ マウムン ット S.O.S</div>
-            <div class="en">Nae maeumeun tto S.O.S</div>
+            <div class="kr">내 마음은 또 <span class="cheer">S.O.S</span></div>
+            <div class="jp">ネ マウムン ット <span class="cheer">S.O.S</span></div>
+            <div class="en">Nae maeumeun tto <span class="cheer">S.O.S</span></div>
         </div>
 
         <div class="section-title">Verse 3</div>
@@ -295,21 +321,53 @@
             <div class="en">Bi gaen dwi haneul saekkkareun Blue</div>
         </div>
         <div class="line-box">
-            <div class="kr">네가 불러 주는 이름을 난 좋아해</div>
-            <div class="jp">ネガ プルロ ジュヌン イルムル ナン チョアヘ</div>
-            <div class="en">Nega bulleo juneun ireumeul nan joahae</div>
+            <div class="kr">네가 불러 주는 이름을 난 좋아해 <span class="cheer">(문!별!이!)</span></div>
+            <div class="jp">ネガ プルロ ジュヌン イルムル ナン チョアヘ <span class="cheer">(ムン！ビョ！リ！)</span></div>
+            <div class="en">Nega bulleo juneun ireumeul nan joahae <span class="cheer">(Moon! Byul! Yi!)</span></div>
         </div>
         
         <div class="section-title">Chorus</div>
-        <div class="line-box" style="border:none; color:var(--sub-text);">
-            (重複 Chorus)
+        <div class="line-box">
+            <div class="kr"><span class="cheer">S! O! S!</span> 어디에 있든 내가 갈게</div>
+            <div class="jp"><span class="cheer">S! O! S!</span> オディエ イットゥン ネガ カルケ</div>
+            <div class="en"><span class="cheer">S! O! S!</span> Eodie itdeun naega galge</div>
+        </div>
+        <div class="line-box">
+            <div class="kr">넌 내게 신호를 보내줘 <span class="cheer">(Wah)</span></div>
+            <div class="jp">ノン ネゲ シノルル ポネジョ <span class="cheer">(Wah)</span></div>
+            <div class="en">Neon naege sinhoreul bonaejwo <span class="cheer">(Wah)</span></div>
+        </div>
+        <div class="line-box">
+            <div class="kr">금방 너를 찾을 수 있게</div>
+            <div class="jp">クムバン ノルル チャジュル ス イッケ</div>
+            <div class="en">Geumbang neoreul chajeul su itge</div>
+        </div>
+        <div class="line-box">
+            <div class="kr">대답해줘 <span class="cheer">Yes or Yes</span></div>
+            <div class="jp">テダペジョ <span class="cheer">Yes or Yes</span></div>
+            <div class="en">Daedaphaejwo <span class="cheer">Yes or Yes</span></div>
+        </div>
+        <div class="line-box">
+            <div class="kr">더 늦기 전에 말해줄래</div>
+            <div class="jp">ト ヌッキ チョネ マレジュルレ</div>
+            <div class="en">Deo neutgi jeone malhaejullae</div>
+        </div>
+        <div class="line-box">
+            <div class="kr">잠 못 드는 내게로 <span class="cheer">(Wah)</span></div>
+            <div class="jp">チャム モッ トゥヌン ネゲロ <span class="cheer">(Wah)</span></div>
+            <div class="en">Jam mot deuneun naegero <span class="cheer">(Wah)</span></div>
+        </div>
+        <div class="line-box">
+            <div class="kr">내 마음은 또 <span class="cheer">S.O.S</span></div>
+            <div class="jp">ネ マウムン ット <span class="cheer">S.O.S</span></div>
+            <div class="en">Nae maeumeun tto <span class="cheer">S.O.S</span></div>
         </div>
 
         <div class="section-title">Bridge</div>
         <div class="line-box">
-            <div class="kr">Far away 저 멀리 If so, fly</div>
-            <div class="jp">Far away チョ モルリ If so, fly</div>
-            <div class="en">Far away jeo meolli If so, fly</div>
+            <div class="kr"><span class="cheer">Far away</span> 저 멀리 <span class="cheer">If so, fly</span></div>
+            <div class="jp"><span class="cheer">Far away</span> チョ モルリ <span class="cheer">If so, fly</span></div>
+            <div class="en"><span class="cheer">Far away</span> jeo meolli <span class="cheer">If so, fly</span></div>
         </div>
         <div class="line-box">
             <div class="kr">꼭 바라왔던 소원을 속삭여</div>
@@ -338,8 +396,40 @@
         </div>
 
         <div class="section-title">Chorus</div>
-        <div class="line-box" style="border:none; color:var(--sub-text);">
-            (重複 Chorus)
+        <div class="line-box">
+            <div class="kr"><span class="cheer">S! O! S!</span> 어디에 있든 내가 갈게</div>
+            <div class="jp"><span class="cheer">S! O! S!</span> オディエ イットゥン ネガ カルケ</div>
+            <div class="en"><span class="cheer">S! O! S!</span> Eodie itdeun naega galge</div>
+        </div>
+        <div class="line-box">
+            <div class="kr">넌 내게 신호를 보내줘 <span class="cheer">(Wah)</span></div>
+            <div class="jp">ノン ネゲ シノルル ポネジョ <span class="cheer">(Wah)</span></div>
+            <div class="en">Neon naege sinhoreul bonaejwo <span class="cheer">(Wah)</span></div>
+        </div>
+        <div class="line-box">
+            <div class="kr">금방 너를 찾을 수 있게</div>
+            <div class="jp">クムバン ノルル チャジュル ス イッケ</div>
+            <div class="en">Geumbang neoreul chajeul su itge</div>
+        </div>
+        <div class="line-box">
+            <div class="kr">대답해줘 <span class="cheer">Yes or Yes</span></div>
+            <div class="jp">テダペジョ <span class="cheer">Yes or Yes</span></div>
+            <div class="en">Daedaphaejwo <span class="cheer">Yes or Yes</span></div>
+        </div>
+        <div class="line-box">
+            <div class="kr">더 늦기 전에 말해줄래</div>
+            <div class="jp">ト ヌッキ チョネ マレジュルレ</div>
+            <div class="en">Deo neutgi jeone malhaejullae</div>
+        </div>
+        <div class="line-box">
+            <div class="kr">잠 못 드는 내게로 <span class="cheer">(Wah)</span></div>
+            <div class="jp">チャム モッ トゥヌン ネゲロ <span class="cheer">(Wah)</span></div>
+            <div class="en">Jam mot deuneun naegero <span class="cheer">(Wah)</span></div>
+        </div>
+        <div class="line-box">
+            <div class="kr">내 마음은 넌 <span class="cheer">S.O.S</span></div>
+            <div class="jp">ネ マウムン ノン <span class="cheer">S.O.S</span></div>
+            <div class="en">Nae maeumeun neon <span class="cheer">S.O.S</span></div>
         </div>
 
         <div class="section-title">Outro</div>
@@ -354,9 +444,16 @@
             <div class="en">Yes or Yes Daedaphaejwo</div>
         </div>
         <div class="line-box">
-            <div class="kr">또 S.O.S</div>
-            <div class="jp">ット S.O.S</div>
-            <div class="en">Tto S.O.S</div>
+            <div class="kr">또 <span class="cheer">S.O.S</span></div>
+            <div class="jp">ット <span class="cheer">S.O.S</span></div>
+            <div class="en">Tto <span class="cheer">S.O.S</span></div>
+        </div>
+        
+        <div class="line-box" style="border: 2px solid var(--cheer-color); border-radius: 10px; margin-top: 20px;">
+            <div class="kr"><span class="cheer">별! 똥별! 크! 로스!</span></div>
+            <div class="jp"><span class="cheer">ビョル！ トンビョル！ クロス！</span></div>
+            <div class="en"><span class="cheer">Byeol! Ttong-byeol! Cross!</span></div>
+            <span class="note">⚠️ 最後的 Pose!</span>
         </div>
 
         <div class="footer">
