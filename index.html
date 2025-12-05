@@ -3,42 +3,83 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MoonByul 歌曲應援</title>
+    <title>Moonbyul 歌曲應援</title>
     <style>
+        /* 1. 這裡就是你要找的 root！我設定為「預設亮色」 */
+        :root {
+            --bg-color: #f5f5f5;      /* 淺灰白背景 */
+            --text-color: #333333;    /* 深灰字體 */
+            --btn-bg: #ffffff;        /* 按鈕背景白 */
+            --btn-border: #7c4dff;    /* 紫色邊框 */
+            --shadow: rgba(0,0,0,0.1);
+        }
+
+        /* 2. 這是切換後的「深色模式」 */
+        body.dark-mode {
+            --bg-color: #121212;      /* 深黑背景 */
+            --text-color: #ffffff;    /* 白字 */
+            --btn-bg: #1e1e1e;        /* 按鈕深灰 */
+            --shadow: rgba(0,0,0,0.5);
+        }
+
         body {
-            background-color: #121212;
-            color: #ffffff;
+            background-color: var(--bg-color);
+            color: var(--text-color);
             font-family: -apple-system, sans-serif;
             text-align: center;
             padding: 50px 20px;
+            transition: background-color 0.3s, color 0.3s; /* 讓切換時有滑順效果 */
         }
-        h1 { color: #7c4dff; margin-bottom: 40px; }
+        
+        h1 { color: #7c4dff; margin-bottom: 30px; }
+
+        /* 切換模式的小按鈕 */
+        .theme-btn {
+            background: none;
+            border: 1px solid var(--btn-border);
+            color: var(--text-color);
+            padding: 5px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+
         .song-link {
             display: block;
             width: 100%;
             max-width: 400px;
             margin: 20px auto;
             padding: 20px;
-            background-color: #1e1e1e;
-            border: 1px solid #7c4dff;
+            background-color: var(--btn-bg); /* 使用變數 */
+            border: 1px solid var(--btn-border);
             border-radius: 15px;
-            color: #ffffff;
+            color: var(--text-color);        /* 使用變數 */
             font-size: 18px;
             font-weight: bold;
-            text-decoration: none; /* 去除底線 */
-            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-            transition: transform 0.2s;
+            text-decoration: none;
+            box-shadow: 0 4px 6px var(--shadow);
+            transition: transform 0.2s, background-color 0.3s, color 0.3s;
         }
         .song-link:active { transform: scale(0.98); }
         .footer { margin-top: 50px; color: #888; font-size: 12px; }
     </style>
 </head>
 <body>
-    <h1>🌙 MoonByul 歌曲應援</h1>
+    <h1>🌙 Moonbyul 歌曲應援</h1>
+
+    <button class="theme-btn" onclick="toggleTheme()">☀ / 🌙 切換模式</button>
     
     <a href="sos.html" class="song-link">🎵 S.O.S</a>
-    <a href="goodbyeandsadeyes.html" class="song-link">🎵 Goodbyes and Sad Eyes</a>
+    <a href="goodbyes.html" class="song-link">🎵 Goodbyes and Sad Eyes</a>
 
     <div class="footer">Create for moonbyul's atm</div>
+
+    <script>
+        function toggleTheme() {
+            // 切換 dark-mode 樣式
+            document.body.classList.toggle('dark-mode');
+        }
+    </script>
 </body>
 </html>
