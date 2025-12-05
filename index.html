@@ -5,20 +5,86 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Moon Byul - S.O.S 空耳應援</title>
     <style>
+        :root {
+            /* 預設深色模式 (Dark Mode) */
+            --bg-color: #121212;
+            --text-color: #ffffff;
+            --highlight-color: #ffeb3b; /* 日文空耳顏色 (黃) */
+            --eng-color: #69f0ae;       /* 英文拼音顏色 (螢光綠) */
+            --box-border: #333;
+            --sub-text: #888;
+            --btn-border: #7c4dff;
+            --btn-text: #ffffff;
+        }
+
+        /* 白天模式變數 (Light Mode) */
+        body.light-mode {
+            --bg-color: #f5f5f5;
+            --text-color: #333333;
+            --highlight-color: #d32f2f; /* 白天日文改用深紅色 */
+            --eng-color: #2e7d32;       /* 白天英文改用深綠色 */
+            --box-border: #ccc;
+            --sub-text: #666;
+            --btn-text: #333333;
+        }
+
         body {
-            background-color: #121212; /* 深色背景，演唱會/暗處不刺眼 */
-            color: #ffffff;
+            background-color: var(--bg-color);
+            color: var(--text-color);
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             margin: 0;
             padding: 20px;
-            line-height: 1.5;
-            text-align: center; /* 文字置中 */
+            padding-top: 130px; /* 為了不被頂部按鈕擋住，上方留白 */
+            line-height: 1.6;
+            text-align: center;
+            transition: background-color 0.3s, color 0.3s; /* 平滑切換效果 */
         }
+
+        /* 固定在頂部的控制面板 */
+        .controls {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--bg-color);
+            padding: 15px 0;
+            border-bottom: 1px solid var(--box-border);
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            transition: background-color 0.3s;
+        }
+
         h1 {
-            color: #7c4dff; /* 文星伊代表色系的紫色 */
-            margin-bottom: 20px;
-            font-size: 24px;
+            color: #7c4dff; /* 文星伊紫色 */
+            margin: 0 0 10px 0;
+            font-size: 20px;
         }
+
+        /* 按鈕樣式 */
+        .btn-group {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+        .btn {
+            background: none;
+            border: 1px solid var(--btn-border);
+            color: var(--text-color);
+            padding: 5px 12px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+        .btn.active {
+            background-color: #7c4dff;
+            color: #fff;
+        }
+        .btn:hover {
+            opacity: 0.8;
+        }
+
+        /* 歌詞區塊 */
         .container {
             max-width: 600px;
             margin: 0 auto;
@@ -27,209 +93,303 @@
         .line-box {
             margin-bottom: 20px;
             padding: 10px;
-            border-bottom: 1px solid #333;
+            border-bottom: 1px solid var(--box-border);
         }
         .kr {
-            font-size: 18px;
+            font-size: 19px;
             font-weight: bold;
-            color: #fff;
-            margin-bottom: 5px;
+            margin-bottom: 4px;
+            letter-spacing: 0.5px;
         }
+        
+        /* 拼音樣式 */
         .jp {
             font-size: 16px;
-            color: #ffeb3b; /* 黃色高亮顯示空耳，方便閱讀 */
-            font-weight: normal;
+            color: var(--highlight-color);
+            display: block; /* 預設顯示日文 */
         }
+        .en {
+            font-size: 15px;
+            color: var(--eng-color);
+            display: none; /* 預設隱藏英文 */
+            font-family: 'Courier New', Courier, monospace; /* 英文用等寬字體比較好讀 */
+            font-weight: bold;
+        }
+
         .section-title {
-            margin-top: 30px;
+            margin-top: 35px;
+            margin-bottom: 10px;
             font-size: 14px;
-            color: #888;
+            color: var(--sub-text);
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
+            border-top: 2px dashed var(--box-border);
+            padding-top: 20px;
+            display: inline-block;
         }
+
         .footer {
-            margin-top: 40px;
+            margin-top: 50px;
             font-size: 12px;
-            color: #555;
+            color: var(--sub-text);
+            font-style: italic;
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <h1>🌙 Moon Byul - S.O.S<br><span style="font-size:0.6em; color:#bbb;">空耳應援練習</span></h1>
+    <div class="controls">
+        <h1>🌙 Moon Byul - S.O.S</h1>
+        <div class="btn-group">
+            <button class="btn" onclick="toggleTheme()">☀/🌙</button>
+            <button class="btn active" id="btn-jp" onclick="showLang('jp')">日文空耳</button>
+            <button class="btn" id="btn-en" onclick="showLang('en')">英文拼音</button>
+        </div>
+    </div>
 
+    <div class="container">
         <div class="line-box">
             <div class="kr">어떤 말이 너에게 좋을까?</div>
             <div class="jp">オットン マリ ノエゲ チョウルッカ?</div>
+            <div class="en">Eotteon mari neoege joeulkka?</div>
         </div>
         <div class="line-box">
             <div class="kr">숨겨왔던 내 마음이 닿을까?</div>
             <div class="jp">スムギョワットン ネ マウミ タウルッカ?</div>
+            <div class="en">Sumgyeowatdeon nae maeumi daeulkka?</div>
         </div>
         <div class="line-box">
             <div class="kr">수많은 고민 끝 하루를 시작해</div>
             <div class="jp">スマヌン コミン クッ ハルル シジャケ</div>
+            <div class="en">Sumaneun gomin kkeut harureul sijakhae</div>
         </div>
 
         <div class="section-title">Verse 2</div>
         <div class="line-box">
             <div class="kr">너의 마음속 난 어디쯤일까?</div>
             <div class="jp">ノエ マウムソク ナン オディチュミルッカ?</div>
+            <div class="en">Neoui maeumsok nan eodijjeumilkka?</div>
         </div>
         <div class="line-box">
             <div class="kr">무심코 지나치진 않을까?</div>
             <div class="jp">ムシムコ チナチジン アヌルッカ?</div>
+            <div class="en">Musimko jinachijin aneulkka?</div>
         </div>
         <div class="line-box">
             <div class="kr">별의별 걱정으로 가득 찬 밤</div>
             <div class="jp">ピョレビョル コクチョンウロ カドゥク チャン パム</div>
+            <div class="en">Byeoruibyeol geokjeongeuro gadeuk chan bam</div>
         </div>
 
         <div class="section-title">Pre-Chorus</div>
         <div class="line-box">
             <div class="kr">새벽이 오기까지 쏟아내</div>
             <div class="jp">セビョギ オギッカジ ソダネ</div>
+            <div class="en">Saebyeogi ogikkaji ssodanae</div>
         </div>
         <div class="line-box">
             <div class="kr">머리는 모두 비워내</div>
             <div class="jp">モリヌン モドゥ ピウォネ</div>
+            <div class="en">Meorineun modu biwonae</div>
         </div>
         <div class="line-box">
             <div class="kr">근데 왜 난 고장 난 채로</div>
             <div class="jp">クンデ ウェ ナン コジャン ナン チェロ</div>
+            <div class="en">Geunde wae nan gojang nan chaero</div>
         </div>
         <div class="line-box">
             <div class="kr">또 너를 생각하고 있는 건데?</div>
             <div class="jp">ット ノルル センガカゴ インヌン コンデ?</div>
+            <div class="en">Tto neoreul saenggakhago inneun geonde?</div>
         </div>
 
         <div class="section-title">Chorus (重點!)</div>
         <div class="line-box">
             <div class="kr">S! O! S! 어디에 있든 내가 갈게</div>
             <div class="jp">S! O! S! オディエ イットゥン ネガ カルケ</div>
+            <div class="en">S! O! S! Eodie itdeun naega galge</div>
         </div>
         <div class="line-box">
             <div class="kr">넌 내게 신호를 보내줘 (Wah)</div>
             <div class="jp">ノン ネゲ シノルル ポネジョ (Wah)</div>
+            <div class="en">Neon naege sinhoreul bonaejwo (Wah)</div>
         </div>
         <div class="line-box">
             <div class="kr">금방 너를 찾을 수 있게</div>
             <div class="jp">クムバン ノルル チャジュル ス イッケ</div>
+            <div class="en">Geumbang neoreul chajeul su itge</div>
         </div>
         <div class="line-box">
             <div class="kr">대답해줘 Yes or Yes</div>
             <div class="jp">テダペジョ Yes or Yes</div>
+            <div class="en">Daedaphaejwo Yes or Yes</div>
         </div>
         <div class="line-box">
             <div class="kr">더 늦기 전에 말해줄래</div>
             <div class="jp">ト ヌッキ チョネ マレジュルレ</div>
+            <div class="en">Deo neutgi jeone malhaejullae</div>
         </div>
         <div class="line-box">
             <div class="kr">잠 못 드는 내게로 (Wah)</div>
             <div class="jp">チャム モッ トゥヌン ネゲロ (Wah)</div>
+            <div class="en">Jam mot deuneun naegero (Wah)</div>
         </div>
         <div class="line-box">
             <div class="kr">내 마음은 또 S.O.S</div>
             <div class="jp">ネ マウムン ット S.O.S</div>
+            <div class="en">Nae maeumeun tto S.O.S</div>
         </div>
 
         <div class="section-title">Verse 3</div>
         <div class="line-box">
             <div class="kr">내 폰엔 네가 좋아하는</div>
             <div class="jp">ネ ポネン ネガ チョアハヌン</div>
+            <div class="en">Nae ponen nega joahaneun</div>
         </div>
         <div class="line-box">
             <div class="kr">음식, 장소로 가득해</div>
             <div class="jp">ウムシク, チャンソロ カドゥケ</div>
+            <div class="en">Eumsik, jangsoro gadeukhae</div>
         </div>
         <div class="line-box">
             <div class="kr">내 편에 너의 시간만 서주길 바라</div>
             <div class="jp">ネ ピョネ ノエ シガンマン ソジュギル パラ</div>
+            <div class="en">Nae pyeone neoui siganman seojugil bara</div>
         </div>
         
         <div class="line-box">
             <div class="kr">뭐해? 란 두 글자에</div>
             <div class="jp">モヘ? ラン トゥ クルチャエ</div>
+            <div class="en">Mwohae? ran du geuljae</div>
         </div>
         <div class="line-box">
             <div class="kr">겉옷 챙겨 나갈 준비해</div>
             <div class="jp">コトッ チェンギョ ナガル ジュンビヘ</div>
+            <div class="en">Geotot chaenggyeo nagal junbihae</div>
         </div>
         <div class="line-box">
             <div class="kr">어디야? 있는 곳으로 갈게</div>
             <div class="jp">オディヤ? インヌン ゴスロ カルケ</div>
+            <div class="en">Eodiya? inneun goseuro galge</div>
         </div>
         <div class="line-box">
             <div class="kr">넌 말만 해</div>
             <div class="jp">ノン マルマン ヘ</div>
+            <div class="en">Neon malman hae</div>
         </div>
 
         <div class="section-title">Pre-Chorus 2</div>
         <div class="line-box">
             <div class="kr">하나둘 쌓여가 Bucket list</div>
             <div class="jp">ハナドゥル サヨガ Bucket list</div>
+            <div class="en">Hanadul ssayeoga Bucket list</div>
         </div>
         <div class="line-box">
             <div class="kr">내가 봐도 우린 닮은 듯 비슷해</div>
             <div class="jp">ネガ バド ウリン タルムン ドゥッ ピステ</div>
+            <div class="en">Naega bwado urin dalmeun deut biseuthae</div>
         </div>
         <div class="line-box">
             <div class="kr">비 갠 뒤 하늘 색깔은 Blue</div>
             <div class="jp">ピ ゲン ドゥイ ハヌル セッカルン Blue</div>
+            <div class="en">Bi gaen dwi haneul saekkkareun Blue</div>
         </div>
         <div class="line-box">
             <div class="kr">네가 불러 주는 이름을 난 좋아해</div>
             <div class="jp">ネガ プルロ ジュヌン イルムル ナン チョアヘ</div>
+            <div class="en">Nega bulleo juneun ireumeul nan joahae</div>
         </div>
         
         <div class="section-title">Chorus</div>
-        <div style="font-size: 14px; color: #888; margin-bottom: 20px;">(重複 Chorus)</div>
+        <div class="line-box" style="border:none; color:var(--sub-text);">
+            (重複 Chorus)
+        </div>
 
         <div class="section-title">Bridge</div>
         <div class="line-box">
             <div class="kr">Far away 저 멀리 If so, fly</div>
             <div class="jp">Far away チョ モルリ If so, fly</div>
+            <div class="en">Far away jeo meolli If so, fly</div>
         </div>
         <div class="line-box">
             <div class="kr">꼭 바라왔던 소원을 속삭여</div>
             <div class="jp">ッコク パラワットン ソウォヌル ソクサギョ</div>
+            <div class="en">Kkok barawatdeon sowoneul soksagyeo</div>
         </div>
         <div class="line-box">
             <div class="kr">서로의 마음을 이어줘</div>
             <div class="jp">ソロエ マウムル イオジョ</div>
+            <div class="en">Seoroui maeumeul ieojwo</div>
         </div>
         <div class="line-box">
             <div class="kr">그대로 미소 지어줘</div>
             <div class="jp">クデロ ミソ チオジョ</div>
+            <div class="en">Geudaero miso jieojwo</div>
         </div>
         <div class="line-box">
             <div class="kr">하얗게 바래진 빈 공간을</div>
             <div class="jp">ハヤケ パレジン ピン コンガヌル</div>
+            <div class="en">Hayake baraejin bin gongganeul</div>
         </div>
         <div class="line-box">
             <div class="kr">너와 나 둘이 가득 채우고 싶어</div>
             <div class="jp">ノワ ナ トゥリ カドゥク チェウゴ シポ</div>
+            <div class="en">Neowa na duri gadeuk chaeugo sipeo</div>
+        </div>
+
+        <div class="section-title">Chorus</div>
+        <div class="line-box" style="border:none; color:var(--sub-text);">
+            (重複 Chorus)
         </div>
 
         <div class="section-title">Outro</div>
         <div class="line-box">
             <div class="kr">난 네게로</div>
             <div class="jp">ナン ネゲロ</div>
+            <div class="en">Nan negero</div>
         </div>
         <div class="line-box">
             <div class="kr">Yes or Yes 대답해줘</div>
             <div class="jp">Yes or Yes テダペジョ</div>
+            <div class="en">Yes or Yes Daedaphaejwo</div>
         </div>
         <div class="line-box">
             <div class="kr">또 S.O.S</div>
             <div class="jp">ット S.O.S</div>
+            <div class="en">Tto S.O.S</div>
         </div>
 
         <div class="footer">
-            Create for MooMoos 🐮
+            Create for moonbyul's atm
         </div>
     </div>
+
+    <script>
+        // 切換拼音語言
+        function showLang(lang) {
+            const jpElements = document.querySelectorAll('.jp');
+            const enElements = document.querySelectorAll('.en');
+            const btnJp = document.getElementById('btn-jp');
+            const btnEn = document.getElementById('btn-en');
+
+            if (lang === 'jp') {
+                jpElements.forEach(el => el.style.display = 'block');
+                enElements.forEach(el => el.style.display = 'none');
+                btnJp.classList.add('active');
+                btnEn.classList.remove('active');
+            } else {
+                jpElements.forEach(el => el.style.display = 'none');
+                enElements.forEach(el => el.style.display = 'block');
+                btnJp.classList.remove('active');
+                btnEn.classList.add('active');
+            }
+        }
+
+        // 切換日夜模式
+        function toggleTheme() {
+            document.body.classList.toggle('light-mode');
+        }
+    </script>
 
 </body>
 </html>
