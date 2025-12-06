@@ -1,4 +1,4 @@
-// --- 設定歌曲清單 ---
+// --- 設定歌曲清單 (以後加歌只要改這裡！) ---
 const songs = [
     { title: "S.O.S", file: "sos.html", icon: "💿" },
     { title: "Goodbyes and Sad Eyes", file: "goodbyesandsadeyes.html", icon: "🫧" },
@@ -13,6 +13,9 @@ const songs = [
     { title: "TOUCHIN&MOVIN", file: "touchinmovin.html", icon: "💃" },
     { title: "Memories", file: "memories.html", icon: "🎞️" },
     { title: "Attention Seeker", file: "attentionseeker.html", icon: "📢" },
+// ⬇️ 以後有新歌，複製上面一行改掉內容即可 ⬇️
+// { title: "新歌名", file: "新檔案.html", icon: "🎵" },
+
 ];
 
 // ==========================================
