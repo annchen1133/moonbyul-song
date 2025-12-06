@@ -5,6 +5,14 @@ const songs = [
     { title: "ICY BBY", file: "icybby.html", icon: "🧊" },
     { title: "Is This Love?", file: "isthislove.html", icon: "💘" },
     { title: "PRESENT", file: "present.html", icon: "🎁" },
+    { title: "Eclipse", file: "eclipse.html", icon: "🌑" },    
+    { title: "LUNATIC", file: "lunatic.html", icon: "👻" },
+    { title: "Absence", file: "absence.html", icon: "☁️" },
+    { title: "Think About", file: "thinkabout.html", icon: "💭" },
+    { title: "C.I.T.T", file: "citt.html", icon: "🧀" },
+    { title: "TOUCHIN&MOVIN", file: "touchinmovin.html", icon: "💃" },
+    { title: "Memories", file: "memories.html", icon: "🎞️" },
+    { title: "Attention Seeker", file: "attentionseeker.html", icon: "📢" },
     // ⬇️ 以後有新歌，複製上面一行改掉內容即可 ⬇️
     // { title: "新歌名", file: "新檔案.html", icon: "🎵" },
 ];
