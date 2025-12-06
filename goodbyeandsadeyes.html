@@ -3,73 +3,131 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Goodbyes - Moon Byul</title>
+    <title>Goodbyes and Sad Eyes - Moon Byul</title>
     <style>
-        /* 共用樣式設定 (與 S.O.S 相同) */
+        /* --- [laundri] 專輯配色設定 --- */
         :root {
-            --bg-color: #121212; --text-color: #ffffff;
-            --highlight-color: #ffeb3b; --eng-color: #69f0ae; --zh-color: #ffab91;
-            --cheer-color: #ff80ab; --box-border: #333; --sub-text: #888;
-            --btn-border: #7c4dff;
+            --bg-color: #f0f4f8;       /* 淺灰藍 */
+            --text-color: #2d3436;     /* 深灰 */
+            --bar-bg: rgba(255, 255, 255, 0.90);
+            --accent: #FF6B35;         /* 活力橙 */
+            --fab-bg: #4DA1FF;         /* 天空藍 */
+            --fab-text: #ffffff;
+            --menu-bg: #ffffff;
+            --shadow: 0 8px 20px rgba(77, 161, 255, 0.2);
+            /* 語言顏色 */
+            --highlight-color: #d32f2f; /* 日 (紅) */
+            --eng-color: #2e7d32;       /* 英 (綠) */
+            --zh-color: #e65100;        /* 中 (橘) */
         }
-        body.light-mode {
-            --bg-color: #f5f5f5; --text-color: #333333;
-            --highlight-color: #d32f2f; --eng-color: #2e7d32; --zh-color: #e65100;
-            --cheer-color: #ff005d; --box-border: #ccc; --sub-text: #666;
+        body.dark-mode {
+            --bg-color: #101820;       /* 深丹寧 */
+            --text-color: #dfe6e9;     /* 灰白 */
+            --bar-bg: rgba(16, 24, 32, 0.95);
+            --accent: #FF9F43;
+            --fab-bg: #2e86de;
+            --fab-text: #ffffff;
+            --menu-bg: #1e272e;
+            --shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+            /* 深色模式下的語言顏色 */
+            --highlight-color: #ffeb3b;
+            --eng-color: #69f0ae;
+            --zh-color: #ffab91;
         }
         body {
             background-color: var(--bg-color); color: var(--text-color);
-            font-family: sans-serif; margin: 0; padding: 20px; padding-top: 180px;
-            text-align: center; line-height: 1.6; transition: 0.3s;
+            font-family: -apple-system, sans-serif;
+            margin: 0; padding: 0; transition: 0.4s ease;
+            padding-bottom: 120px; padding-top: 80px; 
         }
-        .controls {
-            position: fixed; top: 0; left: 0; width: 100%;
-            background-color: var(--bg-color); padding: 10px 0;
-            border-bottom: 1px solid var(--box-border); z-index: 100;
-            display: flex; flex-direction: column; align-items: center; gap: 8px;
+
+        /* 頂部列 */
+        .top-bar {
+            position: fixed; top: 0; left: 0; right: 0; height: 64px;
+            background-color: var(--bar-bg); backdrop-filter: blur(12px);
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 0 24px; z-index: 100; border-bottom: 1px solid rgba(0,0,0,0.05);
         }
-        .btn-row { display: flex; gap: 8px; justify-content: center; width: 90%; max-width: 600px; }
-        .btn {
-            background: none; border: 1px solid var(--btn-border); color: var(--text-color);
-            padding: 6px 12px; border-radius: 20px; cursor: pointer; flex: 1;
+        .theme-toggle { font-size: 22px; background: none; border: none; cursor: pointer; padding: 8px; }
+        .lang-chips { display: flex; gap: 6px; background-color: rgba(0,0,0,0.03); padding: 4px; border-radius: 30px; }
+        .chip {
+            padding: 6px 16px; border-radius: 20px; font-size: 13px; font-weight: 600;
+            cursor: pointer; transition: 0.3s; color: var(--text-color); opacity: 0.6;
         }
-        .btn.active { background-color: #7c4dff; color: #fff; }
-        .btn-home { background-color: #333; border-color: #555; color: #fff; flex: 0 0 auto; text-decoration: none; display: flex; align-items: center; justify-content: center; font-size: 14px; padding: 0 15px;}
+        .chip.active { background-color: var(--accent); color: #fff; opacity: 1; box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
+
+        /* 內容區 */
+        .content { padding: 24px; text-align: center; line-height: 1.8; max-width: 600px; margin: 0 auto; }
+        /* 調整標題大小以適應長歌名 */
+        .song-title { margin: 0 0 40px 0; font-size: 24px; color: var(--text-color); letter-spacing: -0.5px; font-weight: 800; line-height: 1.3; }
         
-        .container { max-width: 600px; margin: 0 auto; padding-bottom: 50px; }
-        .line-box { margin-bottom: 20px; padding: 10px; border-bottom: 1px solid var(--box-border); }
-        .kr { font-size: 19px; font-weight: bold; margin-bottom: 4px; }
+        .line-box { 
+            margin-bottom: 24px; padding: 16px;
+            background: rgba(255,255,255,0.5); border-radius: 16px;
+        }
+        body.dark-mode .line-box { background: rgba(255,255,255,0.05); }
+
+        .kr { font-size: 19px; font-weight: 700; margin-bottom: 4px; display: block; }
+        /* 語言切換邏輯 */
         .jp { color: var(--highlight-color); display: block; }
         .en, .zh { display: none; }
         .en { color: var(--eng-color); font-family: monospace; font-weight: bold; }
         .zh { color: var(--zh-color); font-weight: bold; }
-        .cheer { color: var(--cheer-color); font-weight: 900; text-shadow: 0 0 5px rgba(255,64,129,0.3); }
-        .section-title { margin-top: 30px; color: var(--sub-text); font-size: 14px; border-top: 2px dashed var(--box-border); padding-top: 20px; display: inline-block; }
+        
+        .cheer { color: var(--accent); font-weight: 900; margin-left: 8px; display: inline-block;}
+        .note { font-size: 12px; color: var(--accent); margin-top: 5px; display: block; opacity: 0.8; }
+        .section-title { margin-top: 40px; color: var(--text-color); opacity: 0.5; font-size: 12px; text-transform: uppercase; letter-spacing: 2px; display: inline-block; margin-bottom: 20px; border-bottom: 1px dashed var(--accent); padding-bottom: 5px;}
+
+        /* FAB & Menu */
+        .fab-container { position: fixed; bottom: 32px; left: 24px; z-index: 200; }
+        .fab-btn {
+            width: 64px; height: 64px; border-radius: 24px;
+            background-color: var(--fab-bg); color: var(--fab-text);
+            border: none; box-shadow: var(--shadow); font-size: 28px;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; transition: transform 0.3s;
+        }
+        .fab-btn:active { transform: scale(0.9); }
+        
+        .song-menu {
+            position: absolute; bottom: 80px; left: 0;
+            background-color: var(--menu-bg); border-radius: 24px;
+            width: 240px; padding: 8px; box-shadow: var(--shadow);
+            opacity: 0; transform: translateY(20px) scale(0.9); transform-origin: bottom left;
+            pointer-events: none; transition: 0.4s; border: 1px solid rgba(0,0,0,0.05);
+        }
+        .song-menu.open { opacity: 1; transform: translateY(0) scale(1); pointer-events: auto; }
+        .menu-header { font-size: 12px; opacity: 0.5; padding: 10px 16px 5px; text-transform: uppercase; font-weight: bold; }
+        .menu-item {
+            display: flex; align-items: center; padding: 14px 16px;
+            color: var(--text-color); text-decoration: none; border-radius: 16px;
+            margin-bottom: 2px; font-weight: 600; font-size: 14px; transition: 0.2s;
+        }
+        .menu-item:hover { background-color: rgba(0,0,0,0.04); }
+        body.dark-mode .menu-item:hover { background-color: rgba(255,255,255,0.1); }
+        .menu-item.active { color: var(--fab-bg); background-color: rgba(77, 161, 255, 0.1); }
+        .menu-item span { margin-right: 10px; }
     </style>
 </head>
 <body>
 
-    <div class="controls">
-        <div class="btn-row">
-            <a href="index.html" class="btn btn-home">⬅ 回首頁</a>
-            <h3 style="margin:0; color:#7c4dff;">Goodbyes</h3>
-        </div>
-        <div class="btn-row">
-            <button class="btn" onclick="document.body.classList.toggle('light-mode')">☀/🌙</button>
-        </div>
-        <div class="btn-row">
-            <button class="btn active" id="btn-jp" onclick="showLang('jp')">日文</button>
-            <button class="btn" id="btn-en" onclick="showLang('en')">英文</button>
-            <button class="btn" id="btn-zh" onclick="showLang('zh')">中文</button>
+    <div class="top-bar">
+        <button class="theme-toggle" onclick="toggleTheme()">☀️</button>
+        <div class="lang-chips">
+            <div class="chip active" id="btn-jp" onclick="showLang('jp')">日</div>
+            <div class="chip" id="btn-en" onclick="showLang('en')">英</div>
+            <div class="chip" id="btn-zh" onclick="showLang('zh')">中</div>
         </div>
     </div>
 
-    <div class="container">
+    <div class="content">
+        <h2 class="song-title">Goodbyes and Sad Eyes</h2>
+
         <div class="line-box">
             <div class="kr">Intro</div>
-            <div class="jp">Here's to goodbyes and sad eyes</div>
-            <div class="en">Here's to goodbyes and sad eyes</div>
-            <div class="zh">Here's to goodbyes and sad eyes</div>
+            <div class="jp">Oh-oh, oh-oh, oh-oh</div>
+            <div class="en">Oh-oh, oh-oh, oh-oh</div>
+            <div class="zh">Oh-oh, oh-oh, oh-oh</div>
         </div>
         <div class="line-box">
             <div class="kr">Deleted phone number, yeah <span class="cheer">(Yeah)</span></div>
@@ -147,6 +205,30 @@
             <div class="en">Ollyeo dacheul <span class="cheer">Yeah</span></div>
             <div class="zh">歐溜 大七 <span class="cheer">Yeah</span></div>
         </div>
+        <div class="line-box">
+            <div class="kr">걱정 안 돼, 어차피 Call me little psycho</div>
+            <div class="jp">コクチョン アン デ, オチャピ Call me little psycho</div>
+            <div class="en">Geokjeong an dwae, eochapi Call me little psycho</div>
+            <div class="zh">勾炯 安 Dwe, 喔洽批 Call me little psycho</div>
+        </div>
+        <div class="line-box">
+            <div class="kr">Can back or break 당연한 답은 늘 Easy, I know</div>
+            <div class="jp">Can back or break タンヨナン タブン ヌル Easy, I know</div>
+            <div class="en">Can back or break dangyeonhan dabeun neul Easy, I know</div>
+            <div class="zh">Can back or break 湯優難 達分 怒 Easy, I know</div>
+        </div>
+        <div class="line-box">
+            <div class="kr">뒤보단 앞을 보며 가는 게 난 좋아 <span class="cheer">Without you</span></div>
+            <div class="jp">ティボダン アプル ポミョ カヌン ゲ ナン チョア <span class="cheer">Without you</span></div>
+            <div class="en">Dwibodan apeul bomyeo ganeun ge nan joha <span class="cheer">Without you</span></div>
+            <div class="zh">滴波單 阿普 波謬 嘎能 給 難 啾哇 <span class="cheer">Without you</span></div>
+        </div>
+        <div class="line-box">
+            <div class="kr">And let's figure out</div>
+            <div class="jp">And let's figure out</div>
+            <div class="en">And let's figure out</div>
+            <div class="zh">And let's figure out</div>
+        </div>
 
         <div class="section-title">Chorus</div>
         <div class="line-box">
@@ -173,8 +255,44 @@
             <div class="en">Bandeusi haengbokhae boilge, deultteun step-eul ttara <span class="cheer">like it</span></div>
             <div class="zh">潘得洗 hang-bok-k 波以給, deul-deun step-eul 達拉 <span class="cheer">like it</span></div>
         </div>
+        <div class="line-box">
+            <div class="kr"><span class="cheer">Goodbye</span> 뒷모습도 <span class="cheer">빛날</span></div>
+            <div class="jp"><span class="cheer">Goodbye</span> ティモスプド <span class="cheer">ピンナル</span></div>
+            <div class="en"><span class="cheer">Goodbye</span> Dwinmoseupdo <span class="cheer">binnal</span></div>
+            <div class="zh"><span class="cheer">Goodbye</span> 滴摸司多 <span class="cheer">逼哪</span></div>
+        </div>
+        <div class="line-box">
+            <div class="kr">날 전부 잊어도 괜찮아, 다가올 매일</div>
+            <div class="jp">ナル チョンブ イジョド ケンチャナ, タガオル メイル</div>
+            <div class="en">Nal jeonbu ijeodo gwaenchana, dagaol maeil</div>
+            <div class="zh">那 窮不 以久多 Kwe-恰那, 達嘎偶 me-il</div>
+        </div>
+        <div class="line-box">
+            <div class="kr">부족한 모습도 난 더 힘껏 사랑하려 해</div>
+            <div class="jp">プジョカン モスプド ナン ト ヒムコッ サランハリョ ヘ</div>
+            <div class="en">Bujokhan moseupdo nan deo himkkeot sarangharyeo hae</div>
+            <div class="zh">不糾坎 摸司多 難 偷 him-got 撒郎哈溜 he</div>
+        </div>
 
         <div class="section-title">Verse 2</div>
+        <div class="line-box">
+            <div class="kr">어설피 원했던</div>
+            <div class="jp">オソルピ ウォネットン</div>
+            <div class="en">Eoseolpi wonhaetdeon</div>
+            <div class="zh">喔搜批 翁黑洞</div>
+        </div>
+        <div class="line-box">
+            <div class="kr">다정한 온기는 나를 더 작아지게 만들어</div>
+            <div class="jp">タジョンハン オンギヌン ナルル ト チャガジゲ マンドゥロ</div>
+            <div class="en">Dajeonghan ongineun nareul deo jagajige mandeureo</div>
+            <div class="zh">達炯韓 翁gi-能 那日 偷 查嘎基給 滿度肉</div>
+        </div>
+        <div class="line-box">
+            <div class="kr">Crying, but nobody else doesn't matter anymore</div>
+            <div class="jp">Crying, but nobody else doesn't matter anymore</div>
+            <div class="en">Crying, but nobody else doesn't matter anymore</div>
+            <div class="zh">Crying, but nobody else doesn't matter anymore</div>
+        </div>
         <div class="line-box">
             <div class="kr">적당히 웃긴, 내키지 않아 <span class="cheer">Maybe</span></div>
             <div class="jp">チョクタンヒ ウッキン, ネキジ アナ <span class="cheer">Maybe</span></div>
@@ -188,6 +306,18 @@
             <div class="zh">Kkeulliji anneun vibe, vibe, vibe, not sorry</div>
         </div>
         <div class="line-box">
+            <div class="kr">Only 'round, 'round, 'round, 'round 겉돌지</div>
+            <div class="jp">Only 'round, 'round, 'round, 'round コットルジ</div>
+            <div class="en">Only 'round, 'round, 'round, 'round geotdolji</div>
+            <div class="zh">Only 'round, 'round, 'round, 'round 勾多基</div>
+        </div>
+        <div class="line-box">
+            <div class="kr">솔직할수록 bad, bad, bad love is</div>
+            <div class="jp">ソルチカルスロク bad, bad, bad love is</div>
+            <div class="en">Soljikhalsurok bad, bad, bad love is</div>
+            <div class="zh">Soljikhalsurok bad, bad, bad love is</div>
+        </div>
+        <div class="line-box">
             <div class="kr">난 뼛속까지 나만 아는 애가 돼 <span class="cheer">I don't know</span></div>
             <div class="jp">ナン ピョッソッカジ ナマン アヌン エガ デ <span class="cheer">I don't know</span></div>
             <div class="en">Nan ppyeotsokkaji naman aneun aega dwae <span class="cheer">I don't know</span></div>
@@ -196,16 +326,94 @@
 
         <div class="section-title">Pre-Chorus 2</div>
         <div class="line-box">
+            <div class="kr">Like you 보단 눈 앞에 펼쳐진</div>
+            <div class="jp">Like you ボダン ヌン アペ ピョルチョジン</div>
+            <div class="en">Like you bodan nun ape pyeolchyeojin</div>
+            <div class="zh">Like you 波單 怒 阿pe pyol-cho-jin</div>
+        </div>
+        <div class="line-box">
+            <div class="kr">가슴 가득 설레는 일들이</div>
+            <div class="jp">カスム カドゥク ソルレヌン イルトゥリ</div>
+            <div class="en">Gaseum gadeuk seolleneun ildeuri</div>
+            <div class="zh">嘎森 嘎督 搜雷能 宜督禮</div>
+        </div>
+        <div class="line-box">
+            <div class="kr">유리병 candy처럼 눈 감아도 떠올라 자꾸</div>
+            <div class="jp">ユリビョン candyチョロム ヌン カマド トオルラ チャック</div>
+            <div class="en">Yuribyeong candy-cheoreom nun gamado tteoolla jakku</div>
+            <div class="zh">U-Li-byon candy-綽龍 怒 嘎馬多 偷歐拉 雜估</div>
+        </div>
+        <div class="line-box">
+            <div class="kr">Live without you, yeah</div>
+            <div class="jp">Live without you, yeah</div>
+            <div class="en">Live without you, yeah</div>
+            <div class="zh">Live without you, yeah</div>
+        </div>
+        <div class="line-box">
+            <div class="kr">I wanna chance</div>
+            <div class="jp">I wanna chance</div>
+            <div class="en">I wanna chance</div>
+            <div class="zh">I wanna chance</div>
+        </div>
+        <div class="line-box">
+            <div class="kr">이제 더는 I can't wait for</div>
+            <div class="jp">イジェ トヌン I can't wait for</div>
+            <div class="en">Ije deoneun I can't wait for</div>
+            <div class="zh">宜接 偷能 I can't wait for</div>
+        </div>
+        <div class="line-box">
+            <div class="kr">내 마음은 몇 줄의 글로 쓰이긴 짧고</div>
+            <div class="jp">ネ マウムン ミョッ チュレ クルロ スイギン チャルッコ</div>
+            <div class="en">Nae maeumeun myeot jurui geullo sseu-igin jjalpgo</div>
+            <div class="zh">Ne 媽屋悶 myo 珠雷 葛羅 蘇以ㄍㄧㄣ 雜勾</div>
+        </div>
+        <div class="line-box">
             <div class="kr">쏟아진 비를 향해 달려 나가 <span class="cheer">Better without you</span></div>
             <div class="jp">ソダジン ピルル ヒャンヘ タルリョ ナガ <span class="cheer">Better without you</span></div>
             <div class="en">Ssodajin bireul hyanghae dallyeo naga <span class="cheer">Better without you</span></div>
             <div class="zh">搜達金 逼日 hyang-he 達溜 那嘎 <span class="cheer">Better without you</span></div>
         </div>
+        <div class="line-box">
+            <div class="kr">And I feel alive</div>
+            <div class="jp">And I feel alive</div>
+            <div class="en">And I feel alive</div>
+            <div class="zh">And I feel alive</div>
+        </div>
 
         <div class="section-title">Chorus</div>
-        <div class="line-box" style="color:var(--sub-text); border:none;">(重複 Chorus)</div>
+        <div class="line-box" style="color:var(--text-color); opacity:0.6; border:none;">(Repeat Chorus)</div>
 
         <div class="section-title">Bridge</div>
+        <div class="line-box">
+            <div class="kr">바란 대로 향하는 misfit</div>
+            <div class="jp">パラン デロ ヒャンハヌン misfit</div>
+            <div class="en">Baran daero hyanghaneun misfit</div>
+            <div class="zh">巴蘭 de-ro ㄏㄧㄤ哈能 misfit</div>
+        </div>
+        <div class="line-box">
+            <div class="kr">날 담기엔 벅찬 my youth</div>
+            <div class="jp">ナル タムギエン ポクチャン my youth</div>
+            <div class="en">Nal damgien beokchan my youth</div>
+            <div class="zh">那 黨gi-en po-chan my youth</div>
+        </div>
+        <div class="line-box">
+            <div class="kr">더는 네게 날 얽매 움츠리지 않을래</div>
+            <div class="jp">トヌン ネゲ ナル オルメ ウムチュリジ アヌルレ</div>
+            <div class="en">Deoneun nege nal eolkmae umcheuriji aneullae</div>
+            <div class="zh">偷能 ne-ge 那 or-me um-chu-li-ji 阿努勒</div>
+        </div>
+        <div class="line-box">
+            <div class="kr">오직 날 위한 background 나 홀로 서 난</div>
+            <div class="jp">オジク ナル ウィハン background ナ ホルロ ソ ナン</div>
+            <div class="en">Ojik nal wihan background na hollo seo nan</div>
+            <div class="zh">偶基 那 wi-han background 那 ho-lo 搜 難</div>
+        </div>
+        <div class="line-box">
+            <div class="kr">내겐 오직 나만 주인공인 drama</div>
+            <div class="jp">ネゲン オジク ナマン チュインゴンイン drama</div>
+            <div class="en">Naegen ojik naman juingongin drama</div>
+            <div class="zh">ne-gen 偶基 那曼 朱茵公茵 drama</div>
+        </div>
         <div class="line-box">
             <div class="kr">날 울린대도 that's my happy end</div>
             <div class="jp">ナル ウルリンデド that's my happy end</div>
@@ -238,8 +446,26 @@
             <div class="en">Nunbusin sungani gadeukhae, sangcheobadado <span class="cheer">I like it</span></div>
             <div class="zh">怒不信 孫嘎你 嘎督K, 桑秋八打多 <span class="cheer">I like it</span></div>
         </div>
+        <div class="line-box">
+            <div class="kr"><span class="cheer">Goodbye</span></div>
+            <div class="jp"><span class="cheer">Goodbye</span></div>
+            <div class="en"><span class="cheer">Goodbye</span></div>
+            <div class="zh"><span class="cheer">Goodbye</span></div>
+        </div>
+        <div class="line-box">
+            <div class="kr">I don't need more <span class="cheer">sweet lie (yeah)</span></div>
+            <div class="jp">I don't need more <span class="cheer">sweet lie (yeah)</span></div>
+            <div class="en">I don't need more <span class="cheer">sweet lie (yeah)</span></div>
+            <div class="zh">I don't need more <span class="cheer">sweet lie (yeah)</span></div>
+        </div>
+        <div class="line-box">
+            <div class="kr">지금, 이 확신을 믿어 난 또 두근대</div>
+            <div class="jp">チグム, イ フワクシヌル ミド ナン ット トゥグンデ</div>
+            <div class="en">Jigeum, i hwaksineul mideo nan tto dugeundae</div>
+            <div class="zh">基跟, 宜 hwa-xin-eul me-do 難 偷 杜跟de</div>
+        </div>
         
-        <div class="line-box" style="border: 2px solid var(--cheer-color); border-radius: 10px; margin-top: 20px;">
+        <div class="line-box" style="border: 2px solid var(--accent); border-radius: 16px;">
             <div class="kr">평범한 하루도 느낀 대로 이어가면 돼 <span class="cheer">(문별동별! 완벽했다!)</span></div>
             <div class="jp">ピョンボマン ハルド ヌッキン デロ イオガミョン デ <span class="cheer">(ムンビョル トンビョル！ ワンビョケッタ！)</span></div>
             <div class="en">Pyeongbeomhan harudo neukkin daero ieogamyeon dwae <span class="cheer">(Moon Byul Dong Byul! Wan Byeok Hae Tta!)</span></div>
@@ -248,13 +474,40 @@
         <div style="margin-top:40px; color:#888; font-size:12px;">Create for moonbyul's atm</div>
     </div>
 
+    <div class="fab-container">
+        <div class="song-menu" id="songMenu">
+            <div class="menu-header">Playlist</div>
+            <a href="sos.html" class="menu-item"><span>💿</span> S.O.S</a>
+            <a href="goodbyes.html" class="menu-item active"><span>🫧</span> Goodbyes and Sad Eyes</a>
+        </div>
+        <button class="fab-btn" onclick="toggleMenu()">🎵</button>
+    </div>
+
     <script>
+        function toggleTheme() {
+            document.body.classList.toggle('dark-mode');
+            const btn = document.querySelector('.theme-toggle');
+            btn.textContent = document.body.classList.contains('dark-mode') ? '🌙' : '☀️';
+        }
+
         function showLang(lang) {
             document.querySelectorAll('.jp, .en, .zh').forEach(el => el.style.display = 'none');
             document.querySelectorAll('.' + lang).forEach(el => el.style.display = 'block');
-            document.querySelectorAll('.btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
             document.getElementById('btn-' + lang).classList.add('active');
         }
+
+        function toggleMenu() {
+            document.getElementById('songMenu').classList.toggle('open');
+        }
+
+        document.addEventListener('click', function(event) {
+            const menu = document.getElementById('songMenu');
+            const btn = document.querySelector('.fab-btn');
+            if (!menu.contains(event.target) && !btn.contains(event.target)) {
+                menu.classList.remove('open');
+            }
+        });
     </script>
 </body>
 </html>
