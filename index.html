@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Moon Byul 應援站</title>
     <style>
-        /* --- [laundri] 專輯配色設定 (與其他頁面統一) --- */
+        /* --- [laundri] 專輯配色設定 --- */
         :root {
             --bg-color: #f0f4f8;       /* 淺灰藍背景 */
             --text-color: #2d3436;     /* 深灰文字 */
@@ -79,10 +79,11 @@
         .song-card:active { transform: scale(0.98); }
         .song-card:hover { box-shadow: 0 12px 25px rgba(77, 161, 255, 0.25); }
         
-        .card-info { display: flex; align-items: center; gap: 15px; }
-        .card-icon { font-size: 24px; }
-        .card-title { font-size: 18px; font-weight: 700; }
-        .card-arrow { opacity: 0.3; font-size: 20px; }
+        .card-info { display: flex; align-items: center; gap: 15px; flex: 1; } /* flex:1 讓文字區塊佔滿剩餘空間 */
+        .card-icon { font-size: 24px; flex-shrink: 0; }
+        /* 調整標題樣式以適應長歌名 */
+        .card-title { font-size: 18px; font-weight: 700; line-height: 1.3; }
+        .card-arrow { opacity: 0.3; font-size: 20px; margin-left: 10px; }
 
         /* FAB & Menu */
         .fab-container { position: fixed; bottom: 32px; left: 24px; z-index: 200; }
@@ -98,7 +99,7 @@
         .song-menu {
             position: absolute; bottom: 80px; left: 0;
             background-color: var(--menu-bg); border-radius: 24px;
-            width: 220px; padding: 8px; box-shadow: var(--shadow);
+            width: 240px; padding: 8px; box-shadow: var(--shadow);
             opacity: 0; transform: translateY(20px) scale(0.9); transform-origin: bottom left;
             pointer-events: none; transition: 0.4s; border: 1px solid rgba(0,0,0,0.05);
         }
@@ -107,7 +108,7 @@
         .menu-item {
             display: flex; align-items: center; padding: 14px 16px;
             color: var(--text-color); text-decoration: none; border-radius: 16px;
-            margin-bottom: 2px; font-weight: 600; font-size: 15px; transition: 0.2s;
+            margin-bottom: 2px; font-weight: 600; font-size: 14px; transition: 0.2s;
         }
         .menu-item:hover { background-color: rgba(0,0,0,0.04); }
         body.dark-mode .menu-item:hover { background-color: rgba(255,255,255,0.1); }
@@ -138,10 +139,10 @@
                 <span class="card-arrow">➜</span>
             </a>
 
-            <a href="goodbyes.html" class="song-card">
+            <a href="goodbyesandsadeyes.html" class="song-card">
                 <div class="card-info">
                     <span class="card-icon">🫧</span>
-                    <span class="card-title">Goodbyes</span>
+                    <span class="card-title">goodbyesandsadeyes and Sad Eyes</span>
                 </div>
                 <span class="card-arrow">➜</span>
             </a>
@@ -154,7 +155,7 @@
         <div class="song-menu" id="songMenu">
             <div class="menu-header">Playlist</div>
             <a href="sos.html" class="menu-item"><span>💿</span> S.O.S</a>
-            <a href="goodbyes.html" class="menu-item"><span>🫧</span> Goodbyes...</a>
+            <a href="goodbyesandsadeyes.html" class="menu-item"><span>🫧</span> goodbyesandsadeyes and Sad Eyes</a>
         </div>
         <button class="fab-btn" onclick="toggleMenu()">🎵</button>
     </div>
