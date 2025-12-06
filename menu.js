@@ -24,28 +24,22 @@ const songs = [
 function injectAppMeta() {
     if (!document.head) return;
     
-    // PWA Manifest
-    let linkManifest = document.querySelector('link[rel="manifest"]');
-    if (!linkManifest) {
-        linkManifest = document.createElement('link');
+    if (!document.querySelector('link[rel="manifest"]')) {
+        const linkManifest = document.createElement('link');
         linkManifest.rel = 'manifest';
         linkManifest.href = 'manifest.json';
         document.head.appendChild(linkManifest);
     }
 
-    // iOS Web App Capable
-    let metaApple = document.querySelector('meta[name="apple-mobile-web-app-capable"]');
-    if (!metaApple) {
-        metaApple = document.createElement('meta');
+    if (!document.querySelector('meta[name="apple-mobile-web-app-capable"]')) {
+        const metaApple = document.createElement('meta');
         metaApple.name = 'apple-mobile-web-app-capable';
         metaApple.content = 'yes';
         document.head.appendChild(metaApple);
     }
 
-    // iOS Icon
-    let linkIcon = document.querySelector('link[rel="apple-touch-icon"]');
-    if (!linkIcon) {
-        linkIcon = document.createElement('link');
+    if (!document.querySelector('link[rel="apple-touch-icon"]')) {
+        const linkIcon = document.createElement('link');
         linkIcon.rel = 'apple-touch-icon';
         linkIcon.href = 'icon.png';
         document.head.appendChild(linkIcon);
@@ -54,16 +48,17 @@ function injectAppMeta() {
 injectAppMeta();
 
 // ==========================================
-// 2. 自動加入「回首頁」按鈕
+// 2. 自動加入「回首頁」按鈕 (黑白版 🏠)
 // ==========================================
 function addHomeButton() {
     const currentFile = window.location.pathname.split("/").pop();
-    if (currentFile !== "index.html" && currentFile !== "") {
+    // 確保不是首頁，且按鈕還沒被加過
+    if (currentFile !== "index.html" && currentFile !== "" && !document.querySelector('.home-btn')) {
         const topBar = document.querySelector('.top-bar');
-        if (topBar && !topBar.querySelector('.home-btn')) {
+        if (topBar) {
             const homeBtnHtml = `
                 <a href="index.html" class="home-btn" style="text-decoration: none; margin-right: auto;">
-                    <span style="font-size: 20px;">🏠</span>
+                    <span style="font-size: 20px; filter: grayscale(1);">🏠</span>
                 </a>
             `;
             topBar.insertAdjacentHTML('afterbegin', homeBtnHtml);
@@ -72,13 +67,13 @@ function addHomeButton() {
 }
 
 // ==========================================
-// 3. ✅ 自動更新全站 Footer (警示文字)
+// 3. ✅ 自動更新全站 Footer (已修改文字)
 // ==========================================
 function updateGlobalFooter() {
     const footer = document.querySelector('.footer');
     if (footer) {
         footer.innerHTML = `
-            <p style="margin-bottom: 10px; font-weight: bold;">Create for moonbyul's atm</p>
+            <p style="margin-bottom: 10px; font-weight: bold;">Create for 문별&별똥별</p>
             <p style="font-size: 10px; opacity: 0.6; line-height: 1.6; margin: 0;">
                 本網站為粉絲自製，非官方應用程式。<br>
                 內容僅供個人學習與應援使用，<br>
@@ -89,10 +84,10 @@ function updateGlobalFooter() {
     }
 }
 
-// 統一在頁面載入後執行這些 UI 修改
+// 統一在頁面載入完成後執行 UI 修改
 document.addEventListener('DOMContentLoaded', () => {
     addHomeButton();
-    updateGlobalFooter(); // 執行更新 Footer
+    updateGlobalFooter();
 });
 
 
@@ -121,7 +116,8 @@ const menuHTML = `
     </div>
 `;
 
-if (document.body) {
+// 防止重複加入選單
+if (document.body && !document.querySelector('.fab-container')) {
     document.body.insertAdjacentHTML('beforeend', menuHTML);
 }
 
@@ -150,32 +146,38 @@ document.addEventListener('keydown', function(e) {
     }
 }, false);
 
-const styleSheet = document.createElement("style");
-styleSheet.innerHTML = `
-    * {
-        -webkit-user-select: none !important;
-        -moz-user-select: none !important;
-        -ms-user-select: none !important;
-        user-select: none !important;
-        -webkit-touch-callout: none !important;
-        -webkit-tap-highlight-color: transparent;
-    }
-    body { overscroll-behavior-y: none; }
-    input, textarea { -webkit-user-select: text !important; user-select: text !important; }
-    
-    .home-btn {
-        padding: 8px;
-        border-radius: 50%;
-        transition: 0.3s;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    .home-btn:hover {
-        background-color: rgba(0,0,0,0.05);
-    }
-    body.dark-mode .home-btn:hover {
-        background-color: rgba(255,255,255,0.1);
-    }
-`;
-document.head.appendChild(styleSheet);
+// 防止重複注入 CSS
+if (!document.getElementById('global-style')) {
+    const styleSheet = document.createElement("style");
+    styleSheet.id = 'global-style';
+    styleSheet.innerHTML = `
+        * {
+            -webkit-user-select: none !important;
+            -moz-user-select: none !important;
+            -ms-user-select: none !important;
+            user-select: none !important;
+            -webkit-touch-callout: none !important;
+            -webkit-tap-highlight-color: transparent;
+        }
+        body { overscroll-behavior-y: none; }
+        input, textarea { -webkit-user-select: text !important; user-select: text !important; }
+        
+        .home-btn {
+            padding: 8px;
+            border-radius: 50%;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0.7;
+        }
+        .home-btn:hover {
+            background-color: rgba(0,0,0,0.05);
+            opacity: 1;
+        }
+        body.dark-mode .home-btn:hover {
+            background-color: rgba(255,255,255,0.1);
+        }
+    `;
+    document.head.appendChild(styleSheet);
+}
