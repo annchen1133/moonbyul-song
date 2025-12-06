@@ -1,4 +1,4 @@
-// --- 設定歌曲清單 (以後加歌只要改這裡！) ---
+// --- 設定歌曲清單 ---
 const songs = [
     { title: "S.O.S", file: "sos.html", icon: "💿" },
     { title: "Goodbyes and Sad Eyes", file: "goodbyesandsadeyes.html", icon: "🫧" },
@@ -13,15 +13,41 @@ const songs = [
     { title: "TOUCHIN&MOVIN", file: "touchinmovin.html", icon: "💃" },
     { title: "Memories", file: "memories.html", icon: "🎞️" },
     { title: "Attention Seeker", file: "attentionseeker.html", icon: "📢" },
-    // ⬇️ 以後有新歌，複製上面一行改掉內容即可 ⬇️
 ];
 
-// --- 1. 產生選單 HTML ---
-const currentPath = window.location.pathname.split("/").pop(); // 取得目前檔名
+// ==========================================
+// 1. 自動注入 App 設定 (PWA & iOS)
+// ==========================================
+function injectAppMeta() {
+    if (!document.head) return;
+    
+    // PWA Manifest
+    const linkManifest = document.createElement('link');
+    linkManifest.rel = 'manifest';
+    linkManifest.href = 'manifest.json';
+    document.head.appendChild(linkManifest);
+
+    // iOS Web App Capable
+    const metaApple = document.createElement('meta');
+    metaApple.name = 'apple-mobile-web-app-capable';
+    metaApple.content = 'yes';
+    document.head.appendChild(metaApple);
+
+    // iOS Icon
+    const linkIcon = document.createElement('link');
+    linkIcon.rel = 'apple-touch-icon';
+    linkIcon.href = 'icon.png';
+    document.head.appendChild(linkIcon);
+}
+injectAppMeta();
+
+// ==========================================
+// 2. 產生選單 HTML
+// ==========================================
+const currentPath = window.location.pathname.split("/").pop(); 
 let menuItemsHTML = "";
 
 songs.forEach(song => {
-    // 判斷是否為當前頁面，如果是就加上 active 樣式
     const isActive = currentPath === song.file ? "active" : "";
     menuItemsHTML += `
         <a href="${song.file}" class="menu-item ${isActive}">
@@ -40,7 +66,6 @@ const menuHTML = `
     </div>
 `;
 
-// 2. 將選單插入網頁底部
 if (document.body) {
     document.body.insertAdjacentHTML('beforeend', menuHTML);
 }
@@ -55,46 +80,46 @@ function toggleMenu() {
 document.addEventListener('click', function(event) {
     const menu = document.getElementById('songMenu');
     const btn = document.querySelector('.fab-btn');
-    // 確保元素存在才執行判斷 (避免報錯)
     if (menu && btn && !menu.contains(event.target) && !btn.contains(event.target)) {
         menu.classList.remove('open');
     }
 });
 
 // ==========================================
-// 🛡️ 防複製保護機制 (保護你的心血)
+// 🛡️ 強力防複製保護機制 (升級版)
 // ==========================================
 
 // 1. 禁止滑鼠右鍵
 document.addEventListener('contextmenu', function(e) {
     e.preventDefault();
-});
+}, false);
 
-// 2. 禁止鍵盤快捷鍵 (Ctrl+C, Ctrl+U, F12 等)
+// 2. 禁止鍵盤快捷鍵
 document.addEventListener('keydown', function(e) {
-    // 擋住 F12
-    if (e.key === 'F12') {
+    // F12, Ctrl+C, Ctrl+U, Ctrl+S, Ctrl+P
+    if (e.key === 'F12' || 
+        (e.ctrlKey && (e.key === 'c' || e.key === 'u' || e.key === 's' || e.key === 'p'))) {
         e.preventDefault();
+        e.stopPropagation();
     }
-    // 擋住 Ctrl 組合鍵
-    if (e.ctrlKey && (e.key === 'c' || e.key === 'u' || e.key === 's' || e.key === 'p')) {
-        e.preventDefault();
-    }
-});
+}, false);
 
-// 3. 透過 CSS 禁止選取文字 (注入樣式)
+// 3. 注入強力 CSS (禁止選取 + 禁止 iOS 長按)
 const styleSheet = document.createElement("style");
-styleSheet.innerText = `
-    body {
-        -webkit-user-select: none; /* Chrome/Safari */
-        -moz-user-select: none;    /* Firefox */
-        -ms-user-select: none;     /* IE/Edge */
-        user-select: none;         /* 標準語法 */
+styleSheet.innerHTML = `
+    * {
+        -webkit-user-select: none !important; /* Chrome/Safari/Opera */
+        -moz-user-select: none !important;    /* Firefox */
+        -ms-user-select: none !important;     /* IE/Edge */
+        user-select: none !important;         /* 標準語法 */
+        
+        -webkit-touch-callout: none !important; /* 禁止 iOS 長按跳出選單 */
     }
-    /* 讓輸入框還是可以打字 (如果有輸入框的話) */
+    
+    /* 允許輸入框可以選取 (如果有搜尋框的話) */
     input, textarea {
-        -webkit-user-select: auto;
-        user-select: auto;
+        -webkit-user-select: text !important;
+        user-select: text !important;
     }
 `;
 document.head.appendChild(styleSheet);
