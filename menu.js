@@ -25,53 +25,79 @@ function injectAppMeta() {
     if (!document.head) return;
     
     // PWA Manifest
-    const linkManifest = document.createElement('link');
-    linkManifest.rel = 'manifest';
-    linkManifest.href = 'manifest.json';
-    document.head.appendChild(linkManifest);
+    let linkManifest = document.querySelector('link[rel="manifest"]');
+    if (!linkManifest) {
+        linkManifest = document.createElement('link');
+        linkManifest.rel = 'manifest';
+        linkManifest.href = 'manifest.json';
+        document.head.appendChild(linkManifest);
+    }
 
     // iOS Web App Capable
-    const metaApple = document.createElement('meta');
-    metaApple.name = 'apple-mobile-web-app-capable';
-    metaApple.content = 'yes';
-    document.head.appendChild(metaApple);
+    let metaApple = document.querySelector('meta[name="apple-mobile-web-app-capable"]');
+    if (!metaApple) {
+        metaApple = document.createElement('meta');
+        metaApple.name = 'apple-mobile-web-app-capable';
+        metaApple.content = 'yes';
+        document.head.appendChild(metaApple);
+    }
 
     // iOS Icon
-    const linkIcon = document.createElement('link');
-    linkIcon.rel = 'apple-touch-icon';
-    linkIcon.href = 'icon.png';
-    document.head.appendChild(linkIcon);
+    let linkIcon = document.querySelector('link[rel="apple-touch-icon"]');
+    if (!linkIcon) {
+        linkIcon = document.createElement('link');
+        linkIcon.rel = 'apple-touch-icon';
+        linkIcon.href = 'icon.png';
+        document.head.appendChild(linkIcon);
+    }
 }
 injectAppMeta();
 
 // ==========================================
-// 2. 自動加入「回首頁」按鈕 (新增功能 ✨)
+// 2. 自動加入「回首頁」按鈕
 // ==========================================
 function addHomeButton() {
-    // 取得目前的檔名
     const currentFile = window.location.pathname.split("/").pop();
-    
-    // 如果目前「不是」首頁 (index.html 或 空白)，才加入按鈕
     if (currentFile !== "index.html" && currentFile !== "") {
         const topBar = document.querySelector('.top-bar');
-        if (topBar) {
-            // 建立按鈕 HTML
+        if (topBar && !topBar.querySelector('.home-btn')) {
             const homeBtnHtml = `
                 <a href="index.html" class="home-btn" style="text-decoration: none; margin-right: auto;">
-                    <span style="font-size: 20px; filter: grayscale(1);">🏠</span>
+                    <span style="font-size: 20px;">🏠</span>
                 </a>
             `;
-            // 插入到 Top Bar 的最前面
             topBar.insertAdjacentHTML('afterbegin', homeBtnHtml);
         }
     }
 }
-// 等網頁載入後執行
-document.addEventListener('DOMContentLoaded', addHomeButton);
+
+// ==========================================
+// 3. ✅ 自動更新全站 Footer (警示文字)
+// ==========================================
+function updateGlobalFooter() {
+    const footer = document.querySelector('.footer');
+    if (footer) {
+        footer.innerHTML = `
+            <p style="margin-bottom: 10px; font-weight: bold;">Create for moonbyul's atm</p>
+            <p style="font-size: 10px; opacity: 0.6; line-height: 1.6; margin: 0;">
+                本網站為粉絲自製，非官方應用程式。<br>
+                內容僅供個人學習與應援使用，<br>
+                嚴禁商業用途或未經授權的修改與轉載。<br>
+                (空耳部分由 Gemini 協助製作)
+            </p>
+        `;
+    }
+}
+
+// 統一在頁面載入後執行這些 UI 修改
+document.addEventListener('DOMContentLoaded', () => {
+    addHomeButton();
+    updateGlobalFooter(); // 執行更新 Footer
+});
 
 
 // ==========================================
-// 3. 產生選單 HTML
+// 4. 產生選單 HTML
 // ==========================================
 const currentPath = window.location.pathname.split("/").pop(); 
 let menuItemsHTML = "";
@@ -99,13 +125,11 @@ if (document.body) {
     document.body.insertAdjacentHTML('beforeend', menuHTML);
 }
 
-// 選單開關
 function toggleMenu() {
     const menu = document.getElementById('songMenu');
     if (menu) menu.classList.toggle('open');
 }
 
-// 點擊外部關閉選單
 document.addEventListener('click', function(event) {
     const menu = document.getElementById('songMenu');
     const btn = document.querySelector('.fab-btn');
@@ -115,7 +139,7 @@ document.addEventListener('click', function(event) {
 });
 
 // ==========================================
-// 4. 🛡️ 強力防複製 & CSS 優化
+// 5. 🛡️ 強力防複製 & CSS 優化
 // ==========================================
 
 document.addEventListener('contextmenu', function(e) { e.preventDefault(); }, false);
@@ -139,7 +163,6 @@ styleSheet.innerHTML = `
     body { overscroll-behavior-y: none; }
     input, textarea { -webkit-user-select: text !important; user-select: text !important; }
     
-    /* 回首頁按鈕樣式 */
     .home-btn {
         padding: 8px;
         border-radius: 50%;
