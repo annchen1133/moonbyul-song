@@ -3,83 +3,181 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Moonbyul 歌曲應援</title>
+    <title>Moon Byul 應援站</title>
     <style>
-        /* 1. 這裡就是你要找的 root！我設定為「預設亮色」 */
+        /* --- [laundri] 專輯配色設定 (與其他頁面統一) --- */
         :root {
-            --bg-color: #f5f5f5;      /* 淺灰白背景 */
-            --text-color: #333333;    /* 深灰字體 */
-            --btn-bg: #ffffff;        /* 按鈕背景白 */
-            --btn-border: #7c4dff;    /* 紫色邊框 */
-            --shadow: rgba(0,0,0,0.1);
+            --bg-color: #f0f4f8;       /* 淺灰藍背景 */
+            --text-color: #2d3436;     /* 深灰文字 */
+            --bar-bg: rgba(255, 255, 255, 0.90);
+            
+            --accent: #FF6B35;         /* 活力橙 */
+            --fab-bg: #4DA1FF;         /* 天空藍 */
+            --fab-text: #ffffff;
+            
+            --menu-bg: #ffffff;
+            --card-bg: #ffffff;
+            --shadow: 0 8px 20px rgba(77, 161, 255, 0.15);
+            --border-radius: 24px;
         }
 
-        /* 2. 這是切換後的「深色模式」 */
         body.dark-mode {
-            --bg-color: #121212;      /* 深黑背景 */
-            --text-color: #ffffff;    /* 白字 */
-            --btn-bg: #1e1e1e;        /* 按鈕深灰 */
-            --shadow: rgba(0,0,0,0.5);
+            --bg-color: #101820;       /* 深丹寧黑 */
+            --text-color: #dfe6e9;     /* 灰白文字 */
+            --bar-bg: rgba(16, 24, 32, 0.95);
+            
+            --accent: #FF9F43;
+            --fab-bg: #2e86de;
+            --fab-text: #ffffff;
+            
+            --menu-bg: #1e272e;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
         }
 
         body {
             background-color: var(--bg-color);
             color: var(--text-color);
-            font-family: -apple-system, sans-serif;
-            text-align: center;
-            padding: 50px 20px;
-            transition: background-color 0.3s, color 0.3s; /* 讓切換時有滑順效果 */
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            margin: 0; padding: 0; transition: 0.4s ease;
+            padding-bottom: 120px; padding-top: 80px; 
         }
+
+        /* 頂部功能列 */
+        .top-bar {
+            position: fixed; top: 0; left: 0; right: 0; height: 64px;
+            background-color: var(--bar-bg);
+            backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 0 24px; z-index: 100; border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+        .app-name { font-size: 18px; font-weight: 800; color: var(--text-color); letter-spacing: -0.5px; }
+        .theme-toggle { font-size: 22px; background: none; border: none; cursor: pointer; padding: 8px; border-radius: 50%; transition: 0.3s; }
+        .theme-toggle:hover { background-color: rgba(0,0,0,0.05); }
+
+        /* 內容區 */
+        .content { padding: 24px; max-width: 600px; margin: 0 auto; }
         
-        h1 { color: #7c4dff; margin-bottom: 30px; }
+        .header-area { text-align: center; margin-bottom: 40px; margin-top: 20px; }
+        .welcome-text { font-size: 14px; color: var(--text-color); opacity: 0.6; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 2px; }
+        .main-title { font-size: 32px; margin: 0; color: var(--fab-bg); font-weight: 900; letter-spacing: -1px; }
 
-        /* 切換模式的小按鈕 */
-        .theme-btn {
-            background: none;
-            border: 1px solid var(--btn-border);
-            color: var(--text-color);
-            padding: 5px 15px;
+        /* 歌曲卡片列表 */
+        .song-list { display: flex; flex-direction: column; gap: 16px; }
+        
+        .song-card {
+            display: flex; align-items: center; justify-content: space-between;
+            background-color: var(--card-bg);
+            padding: 20px 24px;
             border-radius: 20px;
-            cursor: pointer;
-            margin-bottom: 30px;
-            font-size: 14px;
-        }
-
-        .song-link {
-            display: block;
-            width: 100%;
-            max-width: 400px;
-            margin: 20px auto;
-            padding: 20px;
-            background-color: var(--btn-bg); /* 使用變數 */
-            border: 1px solid var(--btn-border);
-            border-radius: 15px;
-            color: var(--text-color);        /* 使用變數 */
-            font-size: 18px;
-            font-weight: bold;
             text-decoration: none;
-            box-shadow: 0 4px 6px var(--shadow);
-            transition: transform 0.2s, background-color 0.3s, color 0.3s;
+            color: var(--text-color);
+            box-shadow: var(--shadow);
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: 1px solid rgba(0,0,0,0.02);
         }
-        .song-link:active { transform: scale(0.98); }
-        .footer { margin-top: 50px; color: #888; font-size: 12px; }
+        .song-card:active { transform: scale(0.98); }
+        .song-card:hover { box-shadow: 0 12px 25px rgba(77, 161, 255, 0.25); }
+        
+        .card-info { display: flex; align-items: center; gap: 15px; }
+        .card-icon { font-size: 24px; }
+        .card-title { font-size: 18px; font-weight: 700; }
+        .card-arrow { opacity: 0.3; font-size: 20px; }
+
+        /* FAB & Menu */
+        .fab-container { position: fixed; bottom: 32px; left: 24px; z-index: 200; }
+        .fab-btn {
+            width: 64px; height: 64px; border-radius: 24px;
+            background-color: var(--fab-bg); color: var(--fab-text);
+            border: none; box-shadow: var(--shadow); font-size: 28px;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; transition: transform 0.3s;
+        }
+        .fab-btn:active { transform: scale(0.9); }
+        
+        .song-menu {
+            position: absolute; bottom: 80px; left: 0;
+            background-color: var(--menu-bg); border-radius: 24px;
+            width: 220px; padding: 8px; box-shadow: var(--shadow);
+            opacity: 0; transform: translateY(20px) scale(0.9); transform-origin: bottom left;
+            pointer-events: none; transition: 0.4s; border: 1px solid rgba(0,0,0,0.05);
+        }
+        .song-menu.open { opacity: 1; transform: translateY(0) scale(1); pointer-events: auto; }
+        .menu-header { font-size: 12px; color: var(--text-color); opacity: 0.5; padding: 10px 16px 5px; text-transform: uppercase; font-weight: bold; }
+        .menu-item {
+            display: flex; align-items: center; padding: 14px 16px;
+            color: var(--text-color); text-decoration: none; border-radius: 16px;
+            margin-bottom: 2px; font-weight: 600; font-size: 15px; transition: 0.2s;
+        }
+        .menu-item:hover { background-color: rgba(0,0,0,0.04); }
+        body.dark-mode .menu-item:hover { background-color: rgba(255,255,255,0.1); }
+        .menu-item span { margin-right: 10px; }
+
+        .footer { margin-top: 50px; text-align: center; color: var(--text-color); opacity: 0.4; font-size: 12px; font-style: italic; }
     </style>
 </head>
 <body>
-    <h1>🌙 Moonbyul 歌曲應援</h1>
 
-    <button class="theme-btn" onclick="toggleTheme()">☀ / 🌙 切換模式</button>
-    
-    <a href="sos.html" class="song-link">🎵 S.O.S</a>
-    <a href="goodbyeandsadeyes.html" class="song-link">🎵 Goodbyes and Sad Eyes</a>
+    <div class="top-bar">
+        <div class="app-name">M.B Fanchant</div>
+        <button class="theme-toggle" onclick="toggleTheme()">☀️</button>
+    </div>
 
-    <div class="footer">Create for moonbyul's atm</div>
+    <div class="content">
+        <div class="header-area">
+            <div class="welcome-text">Welcome MooMoo</div>
+            <h1 class="main-title">Moon Byul<br>Cheering Guide</h1>
+        </div>
+
+        <div class="song-list">
+            <a href="sos.html" class="song-card">
+                <div class="card-info">
+                    <span class="card-icon">💿</span>
+                    <span class="card-title">S.O.S</span>
+                </div>
+                <span class="card-arrow">➜</span>
+            </a>
+
+            <a href="goodbyes.html" class="song-card">
+                <div class="card-info">
+                    <span class="card-icon">🫧</span>
+                    <span class="card-title">Goodbyes</span>
+                </div>
+                <span class="card-arrow">➜</span>
+            </a>
+        </div>
+
+        <div class="footer">Create for moonbyul's atm</div>
+    </div>
+
+    <div class="fab-container">
+        <div class="song-menu" id="songMenu">
+            <div class="menu-header">Playlist</div>
+            <a href="sos.html" class="menu-item"><span>💿</span> S.O.S</a>
+            <a href="goodbyes.html" class="menu-item"><span>🫧</span> Goodbyes...</a>
+        </div>
+        <button class="fab-btn" onclick="toggleMenu()">🎵</button>
+    </div>
 
     <script>
         function toggleTheme() {
-            // 切換 dark-mode 樣式
             document.body.classList.toggle('dark-mode');
+            const btn = document.querySelector('.theme-toggle');
+            btn.textContent = document.body.classList.contains('dark-mode') ? '🌙' : '☀️';
         }
+
+        function toggleMenu() {
+            document.getElementById('songMenu').classList.toggle('open');
+        }
+
+        document.addEventListener('click', function(event) {
+            const menu = document.getElementById('songMenu');
+            const btn = document.querySelector('.fab-btn');
+            if (!menu.contains(event.target) && !btn.contains(event.target)) {
+                menu.classList.remove('open');
+            }
+        });
     </script>
+
 </body>
 </html>
