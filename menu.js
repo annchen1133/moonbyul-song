@@ -19,24 +19,30 @@ const songs = [
 ];
 
 // ==========================================
-// 1. 自動注入 App 設定 (PWA & iOS)
+// 1. 自動注入 App 設定 (讓它像 App 一樣全螢幕)
 // ==========================================
 function injectAppMeta() {
     if (!document.head) return;
     
-    // PWA Manifest
+    // 連結 manifest
     const linkManifest = document.createElement('link');
     linkManifest.rel = 'manifest';
     linkManifest.href = 'manifest.json';
     document.head.appendChild(linkManifest);
 
-    // iOS Web App Capable
+    // iOS 全螢幕設定
     const metaApple = document.createElement('meta');
     metaApple.name = 'apple-mobile-web-app-capable';
     metaApple.content = 'yes';
     document.head.appendChild(metaApple);
 
-    // iOS Icon
+    // iOS 狀態列顏色 (透明黑)
+    const metaStatus = document.createElement('meta');
+    metaStatus.name = 'apple-mobile-web-app-status-bar-style';
+    metaStatus.content = 'black-translucent';
+    document.head.appendChild(metaStatus);
+
+    // iOS 圖示
     const linkIcon = document.createElement('link');
     linkIcon.rel = 'apple-touch-icon';
     linkIcon.href = 'icon.png';
@@ -73,13 +79,13 @@ if (document.body) {
     document.body.insertAdjacentHTML('beforeend', menuHTML);
 }
 
-// 3. 選單開關功能
+// 選單開關
 function toggleMenu() {
     const menu = document.getElementById('songMenu');
     if (menu) menu.classList.toggle('open');
 }
 
-// 4. 點擊外部關閉選單
+// 點擊外部關閉選單
 document.addEventListener('click', function(event) {
     const menu = document.getElementById('songMenu');
     const btn = document.querySelector('.fab-btn');
@@ -89,37 +95,39 @@ document.addEventListener('click', function(event) {
 });
 
 // ==========================================
-// 🛡️ 強力防複製保護機制 (升級版)
+// 3. 🛡️ 強力防複製 & App 質感優化 CSS
 // ==========================================
 
-// 1. 禁止滑鼠右鍵
+// 禁止滑鼠右鍵
 document.addEventListener('contextmenu', function(e) {
     e.preventDefault();
 }, false);
 
-// 2. 禁止鍵盤快捷鍵
+// 禁止鍵盤快捷鍵
 document.addEventListener('keydown', function(e) {
-    // F12, Ctrl+C, Ctrl+U, Ctrl+S, Ctrl+P
-    if (e.key === 'F12' || 
-        (e.ctrlKey && (e.key === 'c' || e.key === 'u' || e.key === 's' || e.key === 'p'))) {
+    if (e.key === 'F12' || (e.ctrlKey && (e.key === 'c' || e.key === 'u' || e.key === 's' || e.key === 'p'))) {
         e.preventDefault();
         e.stopPropagation();
     }
 }, false);
 
-// 3. 注入強力 CSS (禁止選取 + 禁止 iOS 長按)
+// 注入 CSS (包含防複製 + 禁止手機回彈效果)
 const styleSheet = document.createElement("style");
 styleSheet.innerHTML = `
     * {
-        -webkit-user-select: none !important; /* Chrome/Safari/Opera */
-        -moz-user-select: none !important;    /* Firefox */
-        -ms-user-select: none !important;     /* IE/Edge */
-        user-select: none !important;         /* 標準語法 */
-        
-        -webkit-touch-callout: none !important; /* 禁止 iOS 長按跳出選單 */
+        -webkit-user-select: none !important;
+        -moz-user-select: none !important;
+        -ms-user-select: none !important;
+        user-select: none !important;
+        -webkit-touch-callout: none !important; /* 禁止 iOS 長按選單 */
+        -webkit-tap-highlight-color: transparent; /* 移除點擊藍框 */
     }
     
-    /* 允許輸入框可以選取 (如果有搜尋框的話) */
+    /* 讓整個網頁滑動起來像 App，不會有彈性拉動的空白 */
+    body {
+        overscroll-behavior-y: none;
+    }
+
     input, textarea {
         -webkit-user-select: text !important;
         user-select: text !important;
