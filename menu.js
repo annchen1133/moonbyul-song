@@ -116,26 +116,27 @@ function toggleMenu() {
 }
 
 // ==========================================
-// 4. 注入 CSS (含微軟正黑體設定)
+// 4. 注入 CSS (含微軟正黑體設定) - 🔓 已解除限制版
 // ==========================================
 if (!document.getElementById('app-style')) {
     const styleSheet = document.createElement("style");
     styleSheet.id = 'app-style';
     styleSheet.innerHTML = `
-        /* --- 全域設定：強制使用微軟正黑體 --- */
+        /* --- 全域設定 --- */
         * {
-            font-family: "Microsoft JhengHei", "微軟正黑體", sans-serif !important; /* ✅ 這裡改了字體 */
-            -webkit-user-select: none !important;
-            -moz-user-select: none !important;
-            user-select: none !important;
-            -webkit-touch-callout: none !important;
+            /* 保留您的字體設定 */
+            font-family: "Microsoft JhengHei", "微軟正黑體", sans-serif !important;
+            
+            /* ✅ 已移除 user-select: none (現在可以選取文字了) */
             -webkit-tap-highlight-color: transparent;
         }
         
-        /* 讓輸入框還是可以打字 */
+        body { overscroll-behavior-y: none; }
+        
+        /* 讓輸入框可以打字 */
         input, textarea { -webkit-user-select: text !important; user-select: text !important; }
         
-        /* --- 以下是樣式設定 (不用動) --- */
+        /* --- 以下是樣式設定 (保持原樣) --- */
         .home-btn { padding: 8px; border-radius: 50%; display: flex; align-items: center; opacity: 0.7; }
         .home-btn:hover { background-color: rgba(0,0,0,0.05); opacity: 1; }
         body.dark-mode .home-btn:hover { background-color: rgba(255,255,255,0.1); }
@@ -191,10 +192,12 @@ if (!document.getElementById('app-style')) {
     document.head.appendChild(styleSheet);
 }
 
-// 禁止 F12 等快捷鍵
+// 🔓 已註解掉禁止 F12 與右鍵的監聽器 (現在可以使用右鍵了)
+/*
 document.addEventListener('contextmenu', e => e.preventDefault());
 document.addEventListener('keydown', e => {
     if (e.key === 'F12' || (e.ctrlKey && ['c','u','s','p'].includes(e.key))) {
         e.preventDefault(); e.stopPropagation();
     }
 });
+*/
