@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const footer = document.querySelector('.footer');
     if (footer) {
         footer.innerHTML = `
-            <p style="margin-bottom: 10px; font-weight: bold;">
+            <p style="font-size: 10px; font-weight: bold;">
             Create for Moonbyul & Shooting Star<br>
             Hope everyone enjoys the concert to the fullest!</p>
             <p style="font-size: 10px; opacity: 0.6; line-height: 1.6; margin: 0;">
