@@ -48,7 +48,7 @@ injectAppMeta();
 // 2. 自動加入回首頁按鈕 & 更新 Footer
 // ==========================================
 document.addEventListener('DOMContentLoaded', () => {
-    // 2-1. 回首頁按鈕 (黑白房子)
+    // 2-1. 回首頁按鈕
     const currentFile = window.location.pathname.split("/").pop();
     if (currentFile !== "index.html" && currentFile !== "" && !document.querySelector('.home-btn')) {
         const topBar = document.querySelector('.top-bar');
@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // 2-2. 更新 Footer (文星伊&流星版)
+    // 2-2. 更新 Footer
     const footer = document.querySelector('.footer');
     if (footer) {
         footer.innerHTML = `
@@ -92,28 +92,20 @@ songs.forEach(song => {
 
 const sheetHTML = `
     <div class="sheet-overlay" id="sheetOverlay" onclick="toggleMenu()"></div>
-    
     <div class="bottom-sheet" id="bottomSheet">
         <div class="sheet-handle-bar"><div class="sheet-handle"></div></div>
         <div class="sheet-header-title">Playlist (${songs.length})</div>
-        <div class="sheet-content">
-            ${menuItemsHTML}
-        </div>
+        <div class="sheet-content">${menuItemsHTML}</div>
     </div>
-
     <div class="fab-container">
         <button class="fab-btn" onclick="toggleMenu()">🎵</button>
     </div>
 `;
 
-// 插入 HTML (防止重複插入)
 if (document.body && !document.querySelector('.bottom-sheet')) {
     document.body.insertAdjacentHTML('beforeend', sheetHTML);
 }
 
-// ==========================================
-// 4. 選單開關功能
-// ==========================================
 function toggleMenu() {
     const overlay = document.getElementById('sheetOverlay');
     const sheet = document.getElementById('bottomSheet');
@@ -124,28 +116,30 @@ function toggleMenu() {
 }
 
 // ==========================================
-// 5. 注入 CSS (Bottom Sheet 樣式 + 防護)
+// 4. 注入 CSS (含微軟正黑體設定)
 // ==========================================
 if (!document.getElementById('app-style')) {
     const styleSheet = document.createElement("style");
     styleSheet.id = 'app-style';
     styleSheet.innerHTML = `
-        /* --- 全域防護設定 --- */
+        /* --- 全域設定：強制使用微軟正黑體 --- */
         * {
+            font-family: "Microsoft JhengHei", "微軟正黑體", sans-serif !important; /* ✅ 這裡改了字體 */
             -webkit-user-select: none !important;
             -moz-user-select: none !important;
             user-select: none !important;
             -webkit-touch-callout: none !important;
             -webkit-tap-highlight-color: transparent;
         }
+        
+        /* 讓輸入框還是可以打字 */
         input, textarea { -webkit-user-select: text !important; user-select: text !important; }
         
-        /* --- 回首頁按鈕 --- */
+        /* --- 以下是樣式設定 (不用動) --- */
         .home-btn { padding: 8px; border-radius: 50%; display: flex; align-items: center; opacity: 0.7; }
         .home-btn:hover { background-color: rgba(0,0,0,0.05); opacity: 1; }
         body.dark-mode .home-btn:hover { background-color: rgba(255,255,255,0.1); }
         
-        /* --- FAB 按鈕 --- */
         .fab-container { position: fixed; bottom: 32px; left: 24px; z-index: 200; }
         .fab-btn {
             width: 64px; height: 64px; border-radius: 24px;
@@ -156,7 +150,6 @@ if (!document.getElementById('app-style')) {
         }
         .fab-btn:active { transform: scale(0.9); }
 
-        /* --- 遮罩層 (Overlay) --- */
         .sheet-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0, 0, 0, 0.5); z-index: 201;
@@ -165,13 +158,10 @@ if (!document.getElementById('app-style')) {
         }
         .sheet-overlay.show { opacity: 1; visibility: visible; }
 
-        /* --- 底部面板 (Bottom Sheet) --- */
         .bottom-sheet {
             position: fixed; bottom: 0; left: 0; width: 100%;
-            max-height: 70vh; /* 最大高度 */
-            background-color: var(--menu-bg);
-            border-radius: 24px 24px 0 0;
-            z-index: 202;
+            max-height: 70vh; background-color: var(--menu-bg);
+            border-radius: 24px 24px 0 0; z-index: 202;
             transform: translateY(100%);
             transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
             display: flex; flex-direction: column;
@@ -179,42 +169,24 @@ if (!document.getElementById('app-style')) {
         }
         .bottom-sheet.show { transform: translateY(0); }
 
-        /* --- 面板內部元件 --- */
         .sheet-handle-bar { padding: 12px 0; display: flex; justify-content: center; }
         .sheet-handle { width: 40px; height: 5px; background: #ddd; border-radius: 10px; }
         .sheet-header-title { text-align: center; font-weight: bold; margin-bottom: 10px; color: var(--text-color); opacity: 0.5; font-size: 12px; letter-spacing: 1px; text-transform: uppercase; }
         
-        .sheet-content {
-            overflow-y: auto; /* 允許滑動 */
-            padding: 0 20px 40px 20px;
-            overscroll-behavior: contain;
-        }
+        .sheet-content { overflow-y: auto; padding: 0 20px 40px 20px; overscroll-behavior: contain; }
 
-        /* --- 歌曲選項樣式 --- */
         .sheet-item {
-            display: flex; align-items: center;
-            padding: 16px; margin-bottom: 8px;
-            background-color: transparent;
-            color: var(--text-color);
-            text-decoration: none;
-            border-radius: 16px;
-            font-weight: 600;
-            font-size: 16px;
-            transition: 0.2s;
+            display: flex; align-items: center; padding: 16px; margin-bottom: 8px;
+            background-color: transparent; color: var(--text-color);
+            text-decoration: none; border-radius: 16px;
+            font-weight: 600; font-size: 16px; transition: 0.2s;
         }
         .sheet-item:active { background-color: rgba(0,0,0,0.05); transform: scale(0.98); }
         .sheet-icon { margin-right: 15px; font-size: 20px; }
         .sheet-text { flex: 1; }
         
-        /* 選中狀態 */
-        .sheet-item.active {
-            background-color: var(--bg-color);
-            color: var(--fab-bg);
-            border: 1px solid var(--fab-bg);
-        }
-        body.dark-mode .sheet-item.active {
-            background-color: rgba(255,255,255,0.1);
-        }
+        .sheet-item.active { background-color: var(--bg-color); color: var(--fab-bg); border: 1px solid var(--fab-bg); }
+        body.dark-mode .sheet-item.active { background-color: rgba(255,255,255,0.1); }
     `;
     document.head.appendChild(styleSheet);
 }
