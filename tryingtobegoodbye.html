@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trying to say good-bye - Moon Byul</title>
+    <style>
+        /* --- [laundri] 앨범 스타일 배색 --- */
+        :root {
+            --bg-color: #f0f4f8;       /* 淺灰藍 */
+            --text-color: #2d3436;     /* 深灰 */
+            --bar-bg: rgba(255, 255, 255, 0.90);
+            --accent: #FF6B35;         /* 活力橙 */
+            --fab-bg: #4DA1FF;         /* 天空藍 */
+            --fab-text: #ffffff;
+            --menu-bg: #ffffff;
+            --shadow: 0 8px 20px rgba(77, 161, 255, 0.2);
+            /* 語言顏色 */
+            --highlight-color: #d32f2f; /* 日 (紅) */
+            --eng-color: #2e7d32;       /* 英 (綠) */
+            --zh-color: #e65100;        /* 中 (橘) */
+        }
+        body.dark-mode {
+            --bg-color: #101820;       /* 深丹寧 */
+            --text-color: #dfe6e9;     /* 灰白 */
+            --bar-bg: rgba(16, 24, 32, 0.95);
+            --accent: #FF9F43;
+            --fab-bg: #2e86de;
+            --fab-text: #ffffff;
+            --menu-bg: #1e272e;
+            --shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+            /* 深色模式下的語言顏色 */
+            --highlight-color: #ffeb3b;
+            --eng-color: #69f0ae;
+            --zh-color: #ffab91;
+        }
+        body {
+            background-color: var(--bg-color); color: var(--text-color);
+            font-family: -apple-system, sans-serif;
+            margin: 0; padding: 0; transition: 0.4s ease;
+            padding-bottom: 120px; padding-top: 80px; 
+        }
+
+        /* 頂部列 */
+        .top-bar {
+            position: fixed; top: 0; left: 0; right: 0; height: 64px;
+            background-color: var(--bar-bg); backdrop-filter: blur(12px);
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 0 24px; z-index: 100; border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+        .theme-toggle { font-size: 22px; background: none; border: none; cursor: pointer; padding: 8px; }
+        .lang-chips { display: flex; gap: 6px; background-color: rgba(0,0,0,0.03); padding: 4px; border-radius: 30px; }
+        .chip {
+            padding: 6px 16px; border-radius: 20px; font-size: 13px; font-weight: 600;
+            cursor: pointer; transition: 0.3s; color: var(--text-color); opacity: 0.6;
+        }
+        .chip.active { background-color: var(--accent); color: #fff; opacity: 1; box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
+
+        /* 內容區 */
+        .content { padding: 24px; text-align: center; line-height: 1.8; max-width: 600px; margin: 0 auto; }
+        .song-title { margin: 0 0 40px 0; font-size: 24px; color: var(--text-color); letter-spacing: -0.5px; font-weight: 800; line-height: 1.3; }
+        
+        .line-box { 
+            margin-bottom: 24px; padding: 16px;
+            background: rgba(255,255,255,0.5); border-radius: 16px;
+        }
+        body.dark-mode .line-box { background: rgba(255,255,255,0.05); }
+
+        .kr { font-size: 19px; font-weight: 700; margin-bottom: 4px; display: block; }
+        /* 語言切換邏輯 */
+        .jp { color: var(--highlight-color); display: block; }
+        .en, .zh { display: none; }
+        .en { color: var(--eng-color); font-family: monospace; font-weight: bold; }
+        .zh { color: var(--zh-color); font-weight: bold; }
+        
+        .section-title { margin-top: 40px; color: var(--text-color); opacity: 0.5; font-size: 12px; text-transform: uppercase; letter-spacing: 2px; display: inline-block; margin-bottom: 20px; border-bottom: 1px dashed var(--accent); padding-bottom: 5px;}
+
+        /* FAB & Menu (menu.js用) */
+        .fab-container { position: fixed; bottom: 32px; left: 24px; z-index: 200; }
+        .fab-btn {
+            width: 64px; height: 64px; border-radius: 24px;
+            background-color: var(--fab-bg); color: var(--fab-text);
+            border: none; box-shadow: var(--shadow); font-size: 28px;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; transition: transform 0.3s;
+        }
+        .fab-btn:active { transform: scale(0.9); }
+        
+        .song-menu {
+            position: absolute; bottom: 80px; left: 0;
+            background-color: var(--menu-bg); border-radius: 24px;
+            width: 240px; padding: 8px; box-shadow: var(--shadow);
+            opacity: 0; transform: translateY(20px) scale(0.9); transform-origin: bottom left;
+            pointer-events: none; transition: 0.4s; border: 1px solid rgba(0,0,0,0.05);
+        }
+        .song-menu.open { opacity: 1; transform: translateY(0) scale(1); pointer-events: auto; }
+        .menu-header { font-size: 12px; opacity: 0.5; padding: 10px 16px 5px; text-transform: uppercase; font-weight: bold; }
+        .menu-item {
+            display: flex; align-items: center; padding: 14px 16px;
+            color: var(--text-color); text-decoration: none; border-radius: 16px;
+            margin-bottom: 2px; font-weight: 600; font-size: 15px; transition: 0.2s;
+        }
+        .menu-item:hover { background-color: rgba(0,0,0,0.04); }
+        body.dark-mode .menu-item:hover { background-color: rgba(255,255,255,0.1); }
+        .menu-item.active { color: var(--fab-bg); background-color: rgba(77, 161, 255, 0.1); }
+        .menu-item span { margin-right: 10px; }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">
+        <button class="theme-toggle" onclick="toggleTheme()">☀️</button>
+        <div class="lang-chips">
+            <div class="chip active" id="btn-jp" onclick="showLang('jp')">日</div>
+            <div class="chip" id="btn-en" onclick="showLang('en')">英</div>
+            <div class="chip" id="btn-zh" onclick="showLang('zh')">中</div>
+        </div>
+    </div>
+
+    <div class="content">
+        <h2 class="song-title">Trying to say good-bye<br><span style="font-size:0.6em; opacity:0.7;">(서툰 이별을 하려해)</span></h2>
+
+        <div class="section-title">Verse 1</div>
+        <div class="line-box">
+            <div class="kr">우리 이제 헤어지기로 해</div>
+            <div class="jp">ウリ イジェ ヘオジギロ ヘ</div>
+            <div class="en">Uri ije heeojigiro hae</div>
+            <div class="zh">屋裡 宜接 he-o-ji-gi-ro he</div>
+        </div>
+        <div class="line-box">
+            <div class="kr">너도 알잖아, 우린 충분했다는 걸</div>
+            <div class="jp">ノド アルジャナ, ウリン チュンブンヘッタヌン ゴル</div>
+            <div class="en">Neodo aljana, urin chungbunhaetdaneun geol</div>
+            <div class="zh">no-do al-ja-na, 屋林 春分he-da-neun 勾</div>
+        </div>
+        <div class="line-box">
+            <div class="kr">이별이 무서워 자꾸 피해 보지만</div>
+            <div class="jp">イビョリ ムソウォ チャック ピヘ ボジマン</div>
+            <div class="en">Ibyeori museowo jakku pihae bojiman</div>
+            <div class="zh">宜pyo-li 母搜窩 雜古 p-he 波基曼</div>
+        </div>
+        <div class="line-box">
+            <div class="kr">이젠 정말 끝인 걸</div>
+            <div class="jp">イジェン チョンマル ックチン ゴル</div>
+            <div class="en">Ijen jeongmal kkeuchin geol</div>
+            <div class="zh">宜jen 炯馬 個親 勾</div>
+        </div>
+
+        <div class="section-title">Pre-Chorus</div>
+        <div class="line-box">
+            <div class="kr">우리 사랑이, 우리 추억이 이젠 끝나가지만</div>
+            <div class="jp">ウリ サランイ, ウリ チュオギ イジェン ックンナカジマン</div>
+            <div class="en">Uri sarangi, uri chueogi ijen kkeunnagajiman</div>
+            <div class="zh">屋裡 撒郎宜, 屋裡 出歐gi 宜jen ke-na-ga-ji-man</div>
+        </div>
+        <div class="line-box">
+            <div class="kr">함께한 기억은 내가 다 가져갈게</div>
+            <div class="jp">ハムッケハン キオグン ネガ タ カジョガルケ</div>
+            <div class="en">Hamkkehan gieogeun naega da gajyeogalge</div>
+            <div class="zh">航給罕 gi-o-geun ne-ga 塔 嘎鳩嘎給</div>
+        </div>
+        <div class="line-box">
+            <div class="kr">끝이란 걸 알지만, 끝이라고 안 할게</div>
+            <div class="jp">ックチラン ゴル アルジマン, ックチラゴ アン ハルケ</div>
+            <div class="en">Kkeuchiran geol aljiman, kkeuchirago an halge</div>
+            <div class="zh">個七蘭 勾 al-ji-man, 個七拉勾 安 哈給</div>
+        </div>
+        <div class="line-box">
+            <div class="kr">내 눈에 비친 네 모습이 날 나쁘게 만들어</div>
+            <div class="jp">ネ ヌネ ピチン ニ モスビ ナル ナップゲ マンドゥロ</div>
+            <div class="en">Nae nune bichin ne moseubi nal nappeuge mandeureo</div>
+            <div class="zh">ne 努內 逼親 ne 摸蘇逼 那 那布給 曼度羅</div>
+        </div>
+
+        <div class="section-title">Chorus</div>
+        <div class="line-box">
+            <div class="kr">나 이제 너와 서툰 이별을 하려 해</div>
+            <div class="jp">ナ イジェ ノワ ソトゥン イビョルル ハリョ ヘ</div>
+            <div class="en">Na ije neowa seotun ibyeoreul haryeo hae</div>
+            <div class="zh">那 宜接 no-wa 搜吞 宜pyo-leul 哈六 he</div>
+        </div>
+        <div class="line-box">
+            <div class="kr">많이 아프겠지만 이제 정말 헤어지려 해</div>
+            <div class="jp">マニ アプゲッチマン イジェ チョンマル ヘオジリョ ヘ</div>
+            <div class="en">Mani apeugetjiman ije jeongmal heeojiryeo hae</div>
+            <div class="zh">媽尼 阿普給基曼 宜接 炯馬 he-o-ji-lyo he</div>
+        </div>
+        <div class="line-box">
+            <div class="kr">가끔 혼자 견디기 힘들어</div>
+            <div class="jp">カックム ホンジャ キョンディギ ヒムドゥロ</div>
+            <div class="en">Gakkeum honja gyeondigi himdeureo</div>
+            <div class="zh">嘎跟 轟家 gyon-di-gi him-deu-lo</div>
+        </div>
+        <div class="line-box">
+            <div class="kr">나도 몰래 널 부르게 되면</div>
+            <div class="jp">ナド モルレ ノル プルゲ デミョン</div>
+            <div class="en">Nado mollae neol bureuge doemyeon</div>
+            <div class="zh">那多 摸le nol 不如給 dwe-myon</div>
+        </div>
+        <div class="line-box">
+            <div class="kr">그냥 지나쳐줘</div>
+            <div class="jp">クニャン チナチョジョ</div>
+            <div class="en">Geunyang jinachyeojwo</div>
+            <div class="zh">可娘 基那秋jwo</div>
+        </div>
+        <div class="line-box">
+            <div class="kr">서툰 이별이라서 그래</div>
+            <div class="jp">ソトゥン イビョリラソ クレ</div>
+            <div class="en">Seotun ibyeoriraseo geurae</div>
+            <div class="zh">搜吞 宜pyo-li-la-so 可雷</div>
+        </div>
+
+        <div class="section-title">Verse 2</div>
+        <div class="line-box">
+            <div class="kr">혹시 그때의 서로를 조금 더 이해했더라면</div>
+            <div class="jp">ホクシ クッテエ ソロルル チョグム ト イヘヘットラミョン</div>
+            <div class="en">Hoksi geuttaeui seororeul jogeum deo ihaehaetdeoramyeon</div>
+            <div class="zh">厚西 可de-e 搜羅rur 鳩跟 偷 宜he-he-do-la-myon</div>
+        </div>
+        <div class="line-box">
+            <div class="kr">우린 조금은 달라졌을까?</div>
+            <div class="jp">ウリン チョグムン タルラジョッスルッカ？</div>
+            <div class="en">Urin jogeumeun dallajyeosseulkka?</div>
+            <div class="zh">屋林 鳩跟門 塔拉九蘇嘎?</div>
+        </div>
+        <div class="line-box">
+            <div class="kr">이제 와서 이러는 내가 너무 이기적인가 봐</div>
+            <div class="jp">イジェ ワソ イロヌン ネガ ノム イギジョギンガ バ</div>
+            <div class="en">Ije waseo ireoneun naega neomu igijeoginga bwa</div>
+            <div class="zh">宜接 哇搜 宜羅能 ne-ga no-mu 宜gi-jo-gin-ga 八</div>
+        </div>
+        <div class="line-box">
+            <div class="kr">내 눈에 비친 네 모습이 날 나쁘게 만들어</div>
+            <div class="jp">ネ ヌネ ピチン ニ モスビ ナル ナップゲ マンドゥロ</div>
+            <div class="en">Nae nune bichin ne moseubi nal nappeuge mandeureo</div>
+            <div class="zh">ne 努內 逼親 ne 摸蘇逼 那 那布給 曼度羅</div>
+        </div>
+
+        <div class="section-title">Chorus</div>
+        <div class="line-box" style="color:var(--text-color); opacity:0.6; border:none;">(Repeat Chorus)</div>
+
+        <div class="section-title">Bridge</div>
+        <div class="line-box">
+            <div class="kr">우리의 최선은 여기까지인 거 같아</div>
+            <div class="jp">ウリエ チェソヌン ヨギッカジイン ゴ カタ</div>
+            <div class="en">Uriui choeseoneun yeogikkajiin geo gata</div>
+            <div class="zh">屋裡e che-so-neun 優gi-ga-ji-in 勾 嘎塔</div>
+        </div>
+        <div class="line-box">
+            <div class="kr">수고 많았어, 이젠 널 보낼게</div>
+            <div class="jp">スゴ マナッソ, イジェン ノル ボネルケ</div>
+            <div class="en">Sugo manasseo, ijen neol bonaelge</div>
+            <div class="zh">蘇勾 馬那搜, 宜jen nol 波ne-ge</div>
+        </div>
+        <div class="line-box">
+            <div class="kr">같은 추억 속에 우리를 이젠 보내줘야 해</div>
+            <div class="jp">カトゥン チュオ ソゲ ウリルル イジェン ポネジョヤ ヘ</div>
+            <div class="en">Gateun chueok soge urireul ijen bonaejwoya hae</div>
+            <div class="zh">嘎吞 出歐 搜給 屋裡rur 宜jen 波ne-jwo-ya he</div>
+        </div>
+        <div class="line-box">
+            <div class="kr">애써 그냥 웃으며 아무렇지 않게 널 보낼게 워우워</div>
+            <div class="jp">エッソ クニャン ウスミョ アムロッチ アンケ ノル ボネルケ ウォウウォ</div>
+            <div class="en">Aesseo geunyang useumyeo amureochi anke neol bonaelge wow-wo</div>
+            <div class="zh">e-so 可娘 屋蘇myo 阿母羅七 安ke nol 波ne-ge 窩五窩</div>
+        </div>
+
+        <div class="section-title">Outro</div>
+        <div class="line-box">
+            <div class="kr">우리 이제 정말 이별을 하려 해</div>
+            <div class="jp">ウリ イジェ チョンマル イビョルル ハリョ ヘ</div>
+            <div class="en">Uri ije jeongmal ibyeoreul haryeo hae</div>
+            <div class="zh">屋裡 宜接 炯馬 宜pyo-leul 哈六 he</div>
+        </div>
+        <div class="line-box">
+            <div class="kr">많이 아프겠지만, 많이 힘들겠지만</div>
+            <div class="jp">マニ アプゲッチマン, マニ ヒムドゥルゲッチマン</div>
+            <div class="en">Mani apeugetjiman, mani himdeulgetjiman</div>
+            <div class="zh">媽尼 阿普給基曼, 媽尼 him-deul-ge-ji-man</div>
+        </div>
+        <div class="line-box">
+            <div class="kr">혹시 우리가 다시 만나게 되는 날이 다가오면</div>
+            <div class="jp">ホクシ ウリガ タシ マンナゲ デヌン ナリ タガオミョン</div>
+            <div class="en">Hoksi uriga dasi mannage doeneun nari dagaomyeon</div>
+            <div class="zh">厚西 屋裡嘎 塔西 曼那給 dwe-neun 那李 塔嘎歐myon</div>
+        </div>
+        <div class="line-box">
+            <div class="kr">그땐 꼭 안아줘</div>
+            <div class="jp">クッテン ッコク アナジョ</div>
+            <div class="en">Geuttaen kkok anajwo</div>
+            <div class="zh">可den gok 阿那jwo</div>
+        </div>
+        <div class="line-box">
+            <div class="kr">많이 보고 싶었다고 말해줘</div>
+            <div class="jp">マニ ポゴ シポッタゴ マレジョ</div>
+            <div class="en">Mani bogo sipeotdago malhaejwo</div>
+            <div class="zh">媽尼 波勾 西剖達勾 馬he-jwo</div>
+        </div>
+
+        <div class="footer">Create for 문별&별똥별</div>
+    </div>
+
+    <script src="menu.js"></script>
+
+    <script>
+        function toggleTheme() {
+            document.body.classList.toggle('dark-mode');
+            const btn = document.querySelector('.theme-toggle');
+            if(btn) btn.textContent = document.body.classList.contains('dark-mode') ? '🌙' : '☀️';
+        }
+
+        function showLang(lang) {
+            document.querySelectorAll('.jp, .en, .zh').forEach(el => el.style.display = 'none');
+            document.querySelectorAll('.' + lang).forEach(el => el.style.display = 'block');
+            document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+            document.getElementById('btn-' + lang).classList.add('active');
+        }
+    </script>
+</body>
+</html>
