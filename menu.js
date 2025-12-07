@@ -62,9 +62,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const footer = document.querySelector('.footer');
     if (footer) {
         footer.innerHTML = `
-            <p style="margin-bottom: 10px; font-weight: bold;">Create for 문별&별똥별</p>
+            <p style="margin-bottom: 10px; font-weight: bold;">
+            Create for Moonbyul & Shooting Star<br>
+            Hope everyone enjoys the concert to the fullest!</p>
             <p style="font-size: 10px; opacity: 0.6; line-height: 1.6; margin: 0;">
-                本網站為粉絲自製，非官方應用程式。<br>
+                本網站為粉絲自製。<br>
                 內容僅供個人學習與應援使用，<br>
                 嚴禁商業用途或未經授權的修改與轉載。<br>
                 (空耳部分由 Gemini 協助製作)
