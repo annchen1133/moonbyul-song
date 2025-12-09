@@ -36,7 +36,7 @@
         }
         body {
             background-color: var(--bg-color); color: var(--text-color);
-            font-family: -apple-system, sans-serif;
+            font-family: "Microsoft JhengHei", "微軟正黑體", -apple-system, sans-serif;
             margin: 0; padding: 0; transition: 0.4s ease;
             padding-bottom: 120px; padding-top: 80px; 
         }
@@ -58,7 +58,7 @@
 
         /* 內容區 */
         .content { padding: 24px; text-align: center; line-height: 1.8; max-width: 600px; margin: 0 auto; }
-        .song-title { margin: 0 0 40px 0; font-size: 24px; color: var(--text-color); letter-spacing: -0.5px; font-weight: 800; line-height: 1.3; }
+        .song-title { margin: 0 0 40px 0; font-size: 28px; color: var(--text-color); letter-spacing: -0.5px; font-weight: 800; }
         
         .line-box { 
             margin-bottom: 24px; padding: 16px;
@@ -77,7 +77,7 @@
         .note { font-size: 12px; color: var(--accent); margin-top: 5px; display: block; opacity: 0.8; }
         .section-title { margin-top: 40px; color: var(--text-color); opacity: 0.5; font-size: 12px; text-transform: uppercase; letter-spacing: 2px; display: inline-block; margin-bottom: 20px; border-bottom: 1px dashed var(--accent); padding-bottom: 5px;}
 
-        /* FAB & Menu (樣式保留供 menu.js 使用) */
+        /* FAB & Menu (menu.js用) */
         .fab-container { position: fixed; bottom: 32px; left: 24px; z-index: 200; }
         .fab-btn {
             width: 64px; height: 64px; border-radius: 24px;
@@ -100,7 +100,7 @@
         .menu-item {
             display: flex; align-items: center; padding: 14px 16px;
             color: var(--text-color); text-decoration: none; border-radius: 16px;
-            margin-bottom: 2px; font-weight: 600; font-size: 14px; transition: 0.2s;
+            margin-bottom: 2px; font-weight: 600; font-size: 15px; transition: 0.2s;
         }
         .menu-item:hover { background-color: rgba(0,0,0,0.04); }
         body.dark-mode .menu-item:hover { background-color: rgba(255,255,255,0.1); }
@@ -123,19 +123,31 @@
         <h2 class="song-title">Goodbyes and Sad Eyes</h2>
 
         <div class="line-box">
-            <div class="kr">Intro</div>
-            <div class="jp">Here's to goodbyes and sad eyes</div>
-            <div class="en">Here's to goodbyes and sad eyes</div>
-            <div class="zh">Here's to goodbyes and sad eyes</div>
+            <div class="kr">Oh Oh Oh Oh Oh Oh</div>
+            <div class="jp">Oh Oh Oh Oh Oh Oh</div>
+            <div class="en">Oh Oh Oh Oh Oh Oh</div>
+            <div class="zh">Oh Oh Oh Oh Oh Oh</div>
         </div>
         <div class="line-box">
-            <div class="kr">Deleted phone number, yeah <span class="cheer">(Yeah)</span></div>
-            <div class="jp">Deleted phone number, yeah <span class="cheer">(Yeah)</span></div>
-            <div class="en">Deleted phone number, yeah <span class="cheer">(Yeah)</span></div>
-            <div class="zh">Deleted phone number, yeah <span class="cheer">(Yeah)</span></div>
+            <div class="kr">Here's to Goodbyes and Sad Eyes</div>
+            <div class="jp">Here's to Goodbyes and Sad Eyes</div>
+            <div class="en">Here's to Goodbyes and Sad Eyes</div>
+            <div class="zh">Here's to Goodbyes and Sad Eyes</div>
+        </div>
+        <div class="line-box">
+            <div class="kr"><span class="cheer">(00:09 문별이 Good! Byes! Sad! Eyes!)</span></div>
+            <div class="jp"><span class="cheer">(00:09 ムンビョリ Good! Byes! Sad! Eyes!)</span></div>
+            <div class="en"><span class="cheer">(00:09 MoonByulE Good! Byes! Sad! Eyes!)</span></div>
+            <div class="zh"><span class="cheer">(00:09 MoonByulE Good! Byes! Sad! Eyes!)</span></div>
         </div>
 
         <div class="section-title">Verse 1</div>
+        <div class="line-box">
+            <div class="kr">Deleted phone number, <span class="cheer">Yeah!</span></div>
+            <div class="jp">Deleted phone number, <span class="cheer">Yeah!</span></div>
+            <div class="en">Deleted phone number, <span class="cheer">Yeah!</span></div>
+            <div class="zh">Deleted phone number, <span class="cheer">Yeah!</span></div>
+        </div>
         <div class="line-box">
             <div class="kr">괜한 망설임 같은 거 남기기 싫어</div>
             <div class="jp">クェナン マンソリム カトゥン ゴ ナムギギ シロ</div>
@@ -143,16 +155,22 @@
             <div class="zh">虧難 忙縮林 嘎吞 勾 男gi-gi 西囉</div>
         </div>
         <div class="line-box">
-            <div class="kr">다가올 sorrow, oh, yeah <span class="cheer">(Oh, yeah)</span></div>
-            <div class="jp">タガオル sorrow, oh, yeah <span class="cheer">(Oh, yeah)</span></div>
-            <div class="en">Dagaol sorrow, oh, yeah <span class="cheer">(Oh, yeah)</span></div>
-            <div class="zh">達嘎偶 sorrow, oh, yeah <span class="cheer">(Oh, yeah)</span></div>
+            <div class="kr">다가올 sorrow, <span class="cheer">Oh Yeah!</span></div>
+            <div class="jp">タガオル sorrow, <span class="cheer">Oh Yeah!</span></div>
+            <div class="en">Dagaol sorrow, <span class="cheer">Oh Yeah!</span></div>
+            <div class="zh">達嘎偶 sorrow, <span class="cheer">Oh Yeah!</span></div>
         </div>
         <div class="line-box">
-            <div class="kr">오직 나만의 밤을 빛나게 할 거야 <span class="cheer">(뭐, 대충)</span></div>
-            <div class="jp">オジク ナマネ パムル ピンナゲ ハル コヤ <span class="cheer">(ムォ, テチュン)</span></div>
-            <div class="en">Ojik namanui bameul binnage hal geoya <span class="cheer">(Mwo, daechung)</span></div>
-            <div class="zh">偶基 那媽內 八木 畢那給 哈 勾呀 <span class="cheer">(摸, Day-choong)</span></div>
+            <div class="kr">오직 나만의 밤을 빛나게 할 거야</div>
+            <div class="jp">オジク ナマネ パムル ピンナゲ ハル コヤ</div>
+            <div class="en">Ojik namanui bameul binnage hal geoya</div>
+            <div class="zh">偶基 那媽內 八木 畢那給 哈 勾呀</div>
+        </div>
+        <div class="line-box">
+            <div class="kr"><span class="cheer">뭐 대충</span></div>
+            <div class="jp"><span class="cheer">ムォ テチュン</span></div>
+            <div class="en"><span class="cheer">Mwo daechung</span></div>
+            <div class="zh"><span class="cheer">莫 得蔥</span></div>
         </div>
         <div class="line-box">
             <div class="kr">이틀쯤 센치한 척하면 돼</div>
@@ -173,180 +191,240 @@
             <div class="zh">No-rur 偷難 達恩 摸久基-rur ㄏㄧㄤ嘿</div>
         </div>
         <div class="line-box">
-            <div class="kr">Own my way 가볍게 훌쩍 fade out</div>
-            <div class="jp">Own my way カビョプケ フルッチョク fade out</div>
-            <div class="en">Own my way gabyeopge huljjeok fade out</div>
-            <div class="zh">Own my way 嘎pyo-ge 呼角 fade out</div>
+            <div class="kr"><span class="cheer">Own my way 가볍게 훌쩍 fade out</span></div>
+            <div class="jp"><span class="cheer">Own my way カビョプケ フルッチョク fade out</span></div>
+            <div class="en"><span class="cheer">Own my way gabyeopge huljjeok fade out</span></div>
+            <div class="zh"><span class="cheer">Own my way 嘎飄給 戶糾 fade out</span></div>
         </div>
 
         <div class="section-title">Pre-Chorus</div>
         <div class="line-box">
-            <div class="kr">유난하게 쨍한 저 달빛이</div>
-            <div class="jp">ユナナゲ ッェンハン チョ タルピチ</div>
-            <div class="en">Yunanhage jjaenghan jeo dalbichi</div>
-            <div class="zh">You-難-ha-ge 醬罕 周 達逼七</div>
+            <div class="kr">유난하게 쨍한 저 <span class="cheer">달빛이</span></div>
+            <div class="jp">ユナナゲ ッェンハン チョ <span class="cheer">タルピチ</span></div>
+            <div class="en">Yunanhage jjaenghan jeo <span class="cheer">dalbichi</span></div>
+            <div class="zh">You-難-ha-ge 醬罕 周 <span class="cheer">搭比七</span></div>
         </div>
         <div class="line-box">
-            <div class="kr">가득해진 눈동자 <span class="cheer">Can you see?</span></div>
-            <div class="jp">カドゥケジン ヌンドンジャ <span class="cheer">Can you see?</span></div>
-            <div class="en">Gadeukhaejin nundongja <span class="cheer">Can you see?</span></div>
-            <div class="zh">嘎督K金 怒東家 <span class="cheer">Can you see?</span></div>
+            <div class="kr">가득해진 눈동자 <span class="cheer">Can you see</span></div>
+            <div class="jp">カドゥケジン ヌンドンジャ <span class="cheer">Can you see</span></div>
+            <div class="en">Gadeukhaejin nundongja <span class="cheer">Can you see</span></div>
+            <div class="zh">嘎督K金 怒東家 <span class="cheer">Can you see</span></div>
         </div>
         <div class="line-box">
-            <div class="kr">반짝인 은하수를 넘어 노를 저어 <span class="cheer">Without you</span></div>
-            <div class="jp">パンチャギン ウナスルル ノモ ノルル チョオ <span class="cheer">Without you</span></div>
-            <div class="en">Banjjagin eunhasureul neomeo noreul jeoeo <span class="cheer">Without you</span></div>
-            <div class="zh">潘雜銀 恩哈蘇-rur no-mo no-rur 周喔 <span class="cheer">Without you</span></div>
+            <div class="kr">반짝인 은하수를 넘어 노를</div>
+            <div class="jp">パンチャギン ウナスルル ノモ ノルル</div>
+            <div class="en">Banjjagin eunhasureul neomeo noreul</div>
+            <div class="zh">潘雜銀 恩哈蘇-rur no-mo no-rur</div>
         </div>
         <div class="line-box">
-            <div class="kr">올려 닻을 <span class="cheer">Yeah</span></div>
-            <div class="jp">オルリョ タチュル <span class="cheer">Yeah</span></div>
-            <div class="en">Ollyeo dacheul <span class="cheer">Yeah</span></div>
-            <div class="zh">歐溜 大七 <span class="cheer">Yeah</span></div>
+            <div class="kr">저어 Without you</div>
+            <div class="jp">チョオ Without you</div>
+            <div class="en">Jeoeo Without you</div>
+            <div class="zh">周喔 Without you</div>
         </div>
         <div class="line-box">
-            <div class="kr">걱정 안 돼, 어차피 Call me little psycho</div>
-            <div class="jp">コクチョン アン デ, オチャピ Call me little psycho</div>
-            <div class="en">Geokjeong an dwae, eochapi Call me little psycho</div>
-            <div class="zh">勾炯 安 Dwe, 喔洽批 Call me little psycho</div>
+            <div class="kr"><span class="cheer">올려 닻을</span> Yeah</div>
+            <div class="jp"><span class="cheer">オルリョ タチュル</span> Yeah</div>
+            <div class="en"><span class="cheer">Ollyeo dacheul</span> Yeah</div>
+            <div class="zh"><span class="cheer">未六 大切</span> Yeah</div>
         </div>
         <div class="line-box">
-            <div class="kr">Can back or break 당연한 답은 늘 Easy, I know</div>
-            <div class="jp">Can back or break タンヨナン タブン ヌル Easy, I know</div>
-            <div class="en">Can back or break dangyeonhan dabeun neul Easy, I know</div>
-            <div class="zh">Can back or break 湯優難 達分 怒 Easy, I know</div>
+            <div class="kr">걱정 안 돼 어차피 Call me little <span class="cheer">Psycho</span></div>
+            <div class="jp">コクチョン アン デ オチャピ Call me little <span class="cheer">Psycho</span></div>
+            <div class="en">Geokjeong an dwae eochapi Call me little <span class="cheer">Psycho</span></div>
+            <div class="zh">勾炯 安 Dwe 喔洽批 Call me little <span class="cheer">Psycho</span></div>
         </div>
         <div class="line-box">
-            <div class="kr">뒤보단 앞을 보며 가는 게 난 좋아 <span class="cheer">Without you</span></div>
-            <div class="jp">ティボダン アプル ポミョ カヌン ゲ ナン チョア <span class="cheer">Without you</span></div>
-            <div class="en">Dwibodan apeul bomyeo ganeun ge nan joha <span class="cheer">Without you</span></div>
-            <div class="zh">滴波單 阿普 波謬 嘎能 給 難 啾哇 <span class="cheer">Without you</span></div>
+            <div class="kr">Can back or break</div>
+            <div class="jp">Can back or break</div>
+            <div class="en">Can back or break</div>
+            <div class="zh">Can back or break</div>
         </div>
         <div class="line-box">
-            <div class="kr">And let's figure out</div>
-            <div class="jp">And let's figure out</div>
-            <div class="en">And let's figure out</div>
-            <div class="zh">And let's figure out</div>
+            <div class="kr">당연한 답은 늘 Easy, <span class="cheer">I know</span></div>
+            <div class="jp">タンヨナン タブン ヌル Easy, <span class="cheer">I know</span></div>
+            <div class="en">Dangyeonhan dabeun neul Easy, <span class="cheer">I know</span></div>
+            <div class="zh">湯優難 達分 怒 Easy, <span class="cheer">I know</span></div>
+        </div>
+        <div class="line-box">
+            <div class="kr">뒤보단 앞을 보며 가는 게 난 좋아</div>
+            <div class="jp">ティボダン アプル ポミョ カヌン ゲ ナン チョア</div>
+            <div class="en">Dwibodan apeul bomyeo ganeun ge nan joha</div>
+            <div class="zh">滴波單 阿普 波謬 嘎能 給 難 啾哇</div>
+        </div>
+        <div class="line-box">
+            <div class="kr">Without you <span class="cheer">And let's figure out</span></div>
+            <div class="jp">Without you <span class="cheer">And let's figure out</span></div>
+            <div class="en">Without you <span class="cheer">And let's figure out</span></div>
+            <div class="zh">Without you <span class="cheer">And let's figure out</span></div>
         </div>
 
         <div class="section-title">Chorus</div>
         <div class="line-box">
-            <div class="kr">완벽한 <span class="cheer">Goodbye</span></div>
-            <div class="jp">ワンビョカン <span class="cheer">Goodbye</span></div>
-            <div class="en">Wanbyeokhan <span class="cheer">Goodbye</span></div>
-            <div class="zh">萬pyo-坎 <span class="cheer">Goodbye</span></div>
+            <div class="kr">완벽한 Goodbye <span class="cheer">(Bye)</span></div>
+            <div class="jp">ワンビョカン Goodbye <span class="cheer">(Bye)</span></div>
+            <div class="en">Wanbyeokhan Goodbye <span class="cheer">(Bye)</span></div>
+            <div class="zh">萬pyo-坎 Goodbye <span class="cheer">(Bye)</span></div>
         </div>
         <div class="line-box">
-            <div class="kr">Don't give me those <span class="cheer">sad eyes</span></div>
-            <div class="jp">Don't give me those <span class="cheer">sad eyes</span></div>
-            <div class="en">Don't give me those <span class="cheer">sad eyes</span></div>
-            <div class="zh">Don't give me those <span class="cheer">sad eyes</span></div>
+            <div class="kr">Don’t give me those sad eyes <span class="cheer">(Eyes)</span></div>
+            <div class="jp">Don’t give me those sad eyes <span class="cheer">(Eyes)</span></div>
+            <div class="en">Don’t give me those sad eyes <span class="cheer">(Eyes)</span></div>
+            <div class="zh">Don’t give me those sad eyes <span class="cheer">(Eyes)</span></div>
         </div>
         <div class="line-box">
-            <div class="kr">준비된 <span class="cheer">all good times</span></div>
-            <div class="jp">チュンビデン <span class="cheer">all good times</span></div>
-            <div class="en">Junbidoen <span class="cheer">all good times</span></div>
-            <div class="zh">準備Dwe <span class="cheer">all good times</span></div>
+            <div class="kr">준비된 All good times <span class="cheer">(Times)</span></div>
+            <div class="jp">チュンビデン All good times <span class="cheer">(Times)</span></div>
+            <div class="en">Junbidoen All good times <span class="cheer">(Times)</span></div>
+            <div class="zh">準備Dwe All good times <span class="cheer">(Times)</span></div>
         </div>
         <div class="line-box">
-            <div class="kr">반드시 행복해 보일게, 들뜬 step을 따라 <span class="cheer">like it</span></div>
-            <div class="jp">パンドゥシ ヘンボケ ボイルケ, トゥルトゥン stepウル タラ <span class="cheer">like it</span></div>
-            <div class="en">Bandeusi haengbokhae boilge, deultteun step-eul ttara <span class="cheer">like it</span></div>
-            <div class="zh">潘得洗 hang-bok-k 波以給, deul-deun step-eul 達拉 <span class="cheer">like it</span></div>
+            <div class="kr">반드시 행복해 보일게</div>
+            <div class="jp">パンドゥシ ヘンボケ ボイルケ</div>
+            <div class="en">Bandeusi haengbokhae boilge</div>
+            <div class="zh">潘得洗 hang-bok-k 波以給</div>
         </div>
         <div class="line-box">
-            <div class="kr"><span class="cheer">Goodbye</span> 뒷모습도 <span class="cheer">빛날</span></div>
-            <div class="jp"><span class="cheer">Goodbye</span> ティモスプド <span class="cheer">ピンナル</span></div>
-            <div class="en"><span class="cheer">Goodbye</span> Dwinmoseupdo <span class="cheer">binnal</span></div>
-            <div class="zh"><span class="cheer">Goodbye</span> 滴摸司多 <span class="cheer">逼哪</span></div>
+            <div class="kr">들뜬 Step을 따라 <span class="cheer">Like it</span></div>
+            <div class="jp">トゥルトゥン Stepウル タラ <span class="cheer">Like it</span></div>
+            <div class="en">Deultteun Step-eul ttara <span class="cheer">Like it</span></div>
+            <div class="zh">deul-deun Step-eul 達拉 <span class="cheer">Like it</span></div>
         </div>
         <div class="line-box">
-            <div class="kr">날 전부 잊어도 괜찮아, 다가올 매일</div>
-            <div class="jp">ナル チョンブ イジョド ケンチャナ, タガオル メイル</div>
-            <div class="en">Nal jeonbu ijeodo gwaenchana, dagaol maeil</div>
-            <div class="zh">那 窮不 以久多 Kwe-恰那, 達嘎偶 me-il</div>
+            <div class="kr">Goodbye <span class="cheer">(Bye)</span></div>
+            <div class="jp">Goodbye <span class="cheer">(Bye)</span></div>
+            <div class="en">Goodbye <span class="cheer">(Bye)</span></div>
+            <div class="zh">Goodbye <span class="cheer">(Bye)</span></div>
         </div>
         <div class="line-box">
-            <div class="kr">부족한 모습도 난 더 힘껏 사랑하려 해</div>
-            <div class="jp">プジョカン モスプド ナン ト ヒムコッ サランハリョ ヘ</div>
-            <div class="en">Bujokhan moseupdo nan deo himkkeot sarangharyeo hae</div>
-            <div class="zh">不糾坎 摸司多 難 偷 him-got 撒郎哈溜 he</div>
+            <div class="kr">뒷모습도 <span class="cheer">빛날</span></div>
+            <div class="jp">ティモスプド <span class="cheer">ピンナル</span></div>
+            <div class="en">Dwinmoseupdo <span class="cheer">binnal</span></div>
+            <div class="zh">滴摸司多 <span class="cheer">比那</span></div>
+        </div>
+        <div class="line-box">
+            <div class="kr">날 전부 잊어도 괜찮아</div>
+            <div class="jp">ナル チョンブ イジョド ケンチャナ</div>
+            <div class="en">Nal jeonbu ijeodo gwaenchana</div>
+            <div class="zh">那 窮不 以久多 Kwe-恰那</div>
+        </div>
+        <div class="line-box">
+            <div class="kr"><span class="cheer">다가올 매일</span></div>
+            <div class="jp"><span class="cheer">タガオル メイル</span></div>
+            <div class="en"><span class="cheer">dagaol maeil</span></div>
+            <div class="zh"><span class="cheer">他嘎喔 每依</span></div>
+        </div>
+        <div class="line-box">
+            <div class="kr">부족한 모습도</div>
+            <div class="jp">プジョカン モスプド</div>
+            <div class="en">Bujokhan moseupdo</div>
+            <div class="zh">不糾坎 摸司多</div>
+        </div>
+        <div class="line-box">
+            <div class="kr"><span class="cheer">난 더 힘껏 사랑하려 해</span></div>
+            <div class="jp"><span class="cheer">ナン ト ヒムコッ サランハリョ ヘ</span></div>
+            <div class="en"><span class="cheer">nan deo himkkeot sarangharyeo hae</span></div>
+            <div class="zh"><span class="cheer">(信勾 沙朗哈六 黑)</span></div>
         </div>
 
         <div class="section-title">Verse 2</div>
         <div class="line-box">
-            <div class="kr">어설피 원했던</div>
-            <div class="jp">オソルピ ウォネットン</div>
-            <div class="en">Eoseolpi wonhaetdeon</div>
-            <div class="zh">喔搜批 翁黑洞</div>
+            <div class="kr">어설피 원했던 <span class="cheer">(Ho~!)</span></div>
+            <div class="jp">オソルピ ウォネットン <span class="cheer">(Ho~!)</span></div>
+            <div class="en">Eoseolpi wonhaetdeon <span class="cheer">(Ho~!)</span></div>
+            <div class="zh">喔搜批 翁黑洞 <span class="cheer">(Ho~!)</span></div>
         </div>
         <div class="line-box">
-            <div class="kr">다정한 온기는 나를 더 작아지게 만들어</div>
-            <div class="jp">タジョンハン オンギヌン ナルル ト チャガジゲ マンドゥロ</div>
-            <div class="en">Dajeonghan ongineun nareul deo jagajige mandeureo</div>
-            <div class="zh">達炯韓 翁gi-能 那日 偷 查嘎基給 滿度肉</div>
+            <div class="kr">다정한 온기는</div>
+            <div class="jp">タジョンハン オンギヌン</div>
+            <div class="en">Dajeonghan ongineun</div>
+            <div class="zh">達炯韓 翁gi-能</div>
         </div>
         <div class="line-box">
-            <div class="kr">Crying, but nobody else doesn't matter anymore</div>
-            <div class="jp">Crying, but nobody else doesn't matter anymore</div>
-            <div class="en">Crying, but nobody else doesn't matter anymore</div>
-            <div class="zh">Crying, but nobody else doesn't matter anymore</div>
+            <div class="kr">나를 더 작아지게 만들어</div>
+            <div class="jp">ナルル ト チャガジゲ マンドゥロ</div>
+            <div class="en">nareul deo jagajige mandeureo</div>
+            <div class="zh">那日 偷 查嘎基給 滿度肉</div>
         </div>
         <div class="line-box">
-            <div class="kr">적당히 웃긴, 내키지 않아 <span class="cheer">Maybe</span></div>
-            <div class="jp">チョクタンヒ ウッキン, ネキジ アナ <span class="cheer">Maybe</span></div>
-            <div class="en">Jeokdanghi utgin, naekiji ana <span class="cheer">Maybe</span></div>
-            <div class="zh">久當hee 屋ㄍㄧㄣ, ne-ki-ji 阿那 <span class="cheer">Maybe</span></div>
+            <div class="kr">Crying, But nobody else</div>
+            <div class="jp">Crying, But nobody else</div>
+            <div class="en">Crying, But nobody else</div>
+            <div class="zh">Crying, But nobody else</div>
         </div>
         <div class="line-box">
-            <div class="kr">끌리지 않는 vibe, vibe, vibe, not sorry</div>
-            <div class="jp">끌리지 않는 vibe, vibe, vibe, not sorry</div>
-            <div class="en">Kkeulliji anneun vibe, vibe, vibe, not sorry</div>
-            <div class="zh">Kkeulliji anneun vibe, vibe, vibe, not sorry</div>
+            <div class="kr">Doesn’t matter anymore</div>
+            <div class="jp">Doesn’t matter anymore</div>
+            <div class="en">Doesn’t matter anymore</div>
+            <div class="zh">Doesn’t matter anymore</div>
         </div>
         <div class="line-box">
-            <div class="kr">Only 'round, 'round, 'round, 'round 겉돌지</div>
-            <div class="jp">Only 'round, 'round, 'round, 'round コットルジ</div>
-            <div class="en">Only 'round, 'round, 'round, 'round geotdolji</div>
-            <div class="zh">Only 'round, 'round, 'round, 'round 勾多基</div>
+            <div class="kr">적당히 웃긴</div>
+            <div class="jp">チョクタンヒ ウッキン</div>
+            <div class="en">Jeokdanghi utgin</div>
+            <div class="zh">久當hee 屋ㄍㄧㄣ</div>
         </div>
         <div class="line-box">
-            <div class="kr">솔직할수록 bad, bad, bad love is</div>
-            <div class="jp">ソルチカルスロク bad, bad, bad love is</div>
-            <div class="en">Soljikhalsurok bad, bad, bad love is</div>
-            <div class="zh">Soljikhalsurok bad, bad, bad love is</div>
+            <div class="kr">내키지 않아 Maybe</div>
+            <div class="jp">ネキジ アナ Maybe</div>
+            <div class="en">naekiji ana Maybe</div>
+            <div class="zh">ne-ki-ji 阿那 Maybe</div>
         </div>
         <div class="line-box">
-            <div class="kr">난 뼛속까지 나만 아는 애가 돼 <span class="cheer">I don't know</span></div>
-            <div class="jp">ナン ピョッソッカジ ナマン アヌン エガ デ <span class="cheer">I don't know</span></div>
-            <div class="en">Nan ppyeotsokkaji naman aneun aega dwae <span class="cheer">I don't know</span></div>
-            <div class="zh">難 pyo-so-嘎基 那曼 阿能 e-嘎 dwe <span class="cheer">I don't know</span></div>
+            <div class="kr">끌리지 않는 <span class="cheer">Vibe-vibe-vibe</span> not sorry</div>
+            <div class="jp">ックルリジ アンヌン <span class="cheer">Vibe-vibe-vibe</span> not sorry</div>
+            <div class="en">Kkeulliji anneun <span class="cheer">Vibe-vibe-vibe</span> not sorry</div>
+            <div class="zh">Kkeulliji anneun <span class="cheer">Vibe-vibe-vibe</span> not sorry</div>
+        </div>
+        <div class="line-box">
+            <div class="kr">Only <span class="cheer">Round-round-round-round</span> 겉돌지</div>
+            <div class="jp">Only <span class="cheer">Round-round-round-round</span> コットルジ</div>
+            <div class="en">Only <span class="cheer">Round-round-round-round</span> geotdolji</div>
+            <div class="zh">Only <span class="cheer">Round-round-round-round</span> 勾多基</div>
+        </div>
+        <div class="line-box">
+            <div class="kr">솔직할수록 <span class="cheer">Bad bad bad</span> love is</div>
+            <div class="jp">ソルチカルスロク <span class="cheer">Bad bad bad</span> love is</div>
+            <div class="en">Soljikhalsurok <span class="cheer">Bad bad bad</span> love is</div>
+            <div class="zh">Soljikhalsurok <span class="cheer">Bad bad bad</span> love is</div>
+        </div>
+        <div class="line-box">
+            <div class="kr">난 뼛속까지 나만 아는 애가 돼</div>
+            <div class="jp">ナン ピョッソッカジ ナマン アヌン エガ デ</div>
+            <div class="en">Nan ppyeotsokkaji naman aneun aega dwae</div>
+            <div class="zh">難 pyo-so-嘎基 那曼 阿能 e-嘎 dwe</div>
+        </div>
+        <div class="line-box">
+            <div class="kr">I don’t know</div>
+            <div class="jp">I don’t know</div>
+            <div class="en">I don’t know</div>
+            <div class="zh">I don’t know</div>
         </div>
 
         <div class="section-title">Pre-Chorus 2</div>
         <div class="line-box">
-            <div class="kr">Like you 보단 눈 앞에 펼쳐진</div>
-            <div class="jp">Like you ボダン ヌン アペ ピョルチョジン</div>
-            <div class="en">Like you bodan nun ape pyeolchyeojin</div>
-            <div class="zh">Like you 波單 怒 阿pe pyol-cho-jin</div>
+            <div class="kr">Like you 보단 눈 앞에 <span class="cheer">펼쳐진</span></div>
+            <div class="jp">Like you ボダン ヌン アペ <span class="cheer">ピョルチョジン</span></div>
+            <div class="en">Like you bodan nun ape <span class="cheer">pyeolchyeojin</span></div>
+            <div class="zh">Like you 波單 怒 阿pe <span class="cheer">(飄丘近)</span></div>
         </div>
         <div class="line-box">
-            <div class="kr">가슴 가득 설레는 일들이</div>
-            <div class="jp">カスム カドゥク ソルレヌン イルトゥリ</div>
-            <div class="en">Gaseum gadeuk seolleneun ildeuri</div>
-            <div class="zh">嘎森 嘎督 搜雷能 宜督禮</div>
+            <div class="kr">가슴 가득 설레는 <span class="cheer">일들이</span></div>
+            <div class="jp">カスム カドゥク ソルレヌン <span class="cheer">イルトゥリ</span></div>
+            <div class="en">Gaseum gadeuk seolleneun <span class="cheer">ildeuri</span></div>
+            <div class="zh">嘎森 嘎督 搜雷能 <span class="cheer">(宜得利)</span></div>
         </div>
         <div class="line-box">
-            <div class="kr">유리병 candy처럼 눈 감아도 떠올라 자꾸</div>
-            <div class="jp">ユリビョン candyチョロム ヌン カマド トオルラ チャック</div>
-            <div class="en">Yuribyeong candy-cheoreom nun gamado tteoolla jakku</div>
-            <div class="zh">U-Li-byon candy-綽龍 怒 嘎馬多 偷歐拉 雜估</div>
+            <div class="kr">유리병 Candy처럼 눈 감아도 떠올라 자꾸</div>
+            <div class="jp">ユリビョン Candyチョロム ヌン カマド トオルラ チャック</div>
+            <div class="en">Yuribyeong Candy-cheoreom nun gamado tteoolla jakku</div>
+            <div class="zh">U-Li-byon Candy-綽龍 怒 嘎馬多 偷歐拉 雜估</div>
         </div>
         <div class="line-box">
-            <div class="kr">Live without you, yeah</div>
-            <div class="jp">Live without you, yeah</div>
-            <div class="en">Live without you, yeah</div>
-            <div class="zh">Live without you, yeah</div>
+            <div class="kr"><span class="cheer">Live without you</span>, yeah</div>
+            <div class="jp"><span class="cheer">Live without you</span>, yeah</div>
+            <div class="en"><span class="cheer">Live without you</span>, yeah</div>
+            <div class="zh"><span class="cheer">Live without you</span>, yeah</div>
         </div>
         <div class="line-box">
             <div class="kr">I wanna chance</div>
@@ -355,28 +433,34 @@
             <div class="zh">I wanna chance</div>
         </div>
         <div class="line-box">
-            <div class="kr">이제 더는 I can't wait for</div>
-            <div class="jp">イジェ トヌン I can't wait for</div>
-            <div class="en">Ije deoneun I can't wait for</div>
-            <div class="zh">宜接 偷能 I can't wait for</div>
+            <div class="kr">이제 더는 I can’t <span class="cheer">Wait for</span></div>
+            <div class="jp">イジェ トヌン I can’t <span class="cheer">Wait for</span></div>
+            <div class="en">Ije deoneun I can’t <span class="cheer">Wait for</span></div>
+            <div class="zh">宜接 偷能 I can’t <span class="cheer">Wait for</span></div>
         </div>
         <div class="line-box">
-            <div class="kr">내 마음은 몇 줄의 글로 쓰이긴 짧고</div>
-            <div class="jp">ネ マウムン ミョッ チュレ クルロ スイギン チャルッコ</div>
-            <div class="en">Nae maeumeun myeot jurui geullo sseu-igin jjalpgo</div>
-            <div class="zh">Ne 媽屋悶 myo 珠雷 葛羅 蘇以ㄍㄧㄣ 雜勾</div>
+            <div class="kr">내 마음은 몇 줄의 글로 쓰이긴 <span class="cheer">짧고</span></div>
+            <div class="jp">ネ マウムン ミョッ チュレ クルロ スイギン <span class="cheer">チャルッコ</span></div>
+            <div class="en">Nae maeumeun myeot jurui geullo sseu-igin <span class="cheer">jjalpgo</span></div>
+            <div class="zh">Ne 媽屋悶 myo 珠雷 葛羅 蘇以ㄍㄧㄣ <span class="cheer">(加勾)</span></div>
         </div>
         <div class="line-box">
-            <div class="kr">쏟아진 비를 향해 달려 나가 <span class="cheer">Better without you</span></div>
-            <div class="jp">ソダジン ピルル ヒャンヘ タルリョ ナガ <span class="cheer">Better without you</span></div>
-            <div class="en">Ssodajin bireul hyanghae dallyeo naga <span class="cheer">Better without you</span></div>
-            <div class="zh">搜達金 逼日 hyang-he 達溜 那嘎 <span class="cheer">Better without you</span></div>
+            <div class="kr">쏟아진 비를 향해 달려 나가</div>
+            <div class="jp">ソダジン ピルル ヒャンヘ タルリョ ナガ</div>
+            <div class="en">Ssodajin bireul hyanghae dallyeo naga</div>
+            <div class="zh">搜達金 逼日 hyang-he 達溜 那嘎</div>
         </div>
         <div class="line-box">
-            <div class="kr">And I feel alive</div>
-            <div class="jp">And I feel alive</div>
-            <div class="en">And I feel alive</div>
-            <div class="zh">And I feel alive</div>
+            <div class="kr">Better without you</div>
+            <div class="jp">Better without you</div>
+            <div class="en">Better without you</div>
+            <div class="zh">Better without you</div>
+        </div>
+        <div class="line-box">
+            <div class="kr"><span class="cheer">And I feel alive</span></div>
+            <div class="jp"><span class="cheer">And I feel alive</span></div>
+            <div class="en"><span class="cheer">And I feel alive</span></div>
+            <div class="zh"><span class="cheer">And I feel alive</span></div>
         </div>
 
         <div class="section-title">Chorus</div>
@@ -384,93 +468,142 @@
 
         <div class="section-title">Bridge</div>
         <div class="line-box">
-            <div class="kr">바란 대로 향하는 misfit</div>
-            <div class="jp">パラン デロ ヒャンハヌン misfit</div>
-            <div class="en">Baran daero hyanghaneun misfit</div>
-            <div class="zh">巴蘭 de-ro ㄏㄧㄤ哈能 misfit</div>
+            <div class="kr">\ <span class="cheer">SCREAM</span> /</div>
+            <div class="jp">\ <span class="cheer">SCREAM</span> /</div>
+            <div class="en">\ <span class="cheer">SCREAM</span> /</div>
+            <div class="zh">\ <span class="cheer">SCREAM</span> /</div>
         </div>
         <div class="line-box">
-            <div class="kr">날 담기엔 벅찬 my youth</div>
-            <div class="jp">ナル タムギエン ポクチャン my youth</div>
-            <div class="en">Nal damgien beokchan my youth</div>
-            <div class="zh">那 黨gi-en po-chan my youth</div>
+            <div class="kr">바란 대로 향하는 Misfit</div>
+            <div class="jp">パラン デロ ヒャンハヌン Misfit</div>
+            <div class="en">Baran daero hyanghaneun Misfit</div>
+            <div class="zh">巴蘭 de-ro ㄏㄧㄤ哈能 Misfit</div>
         </div>
         <div class="line-box">
-            <div class="kr">더는 네게 날 얽매 움츠리지 않을래</div>
-            <div class="jp">トヌン ネゲ ナル オルメ ウムチュリジ アヌルレ</div>
-            <div class="en">Deoneun nege nal eolkmae umcheuriji aneullae</div>
-            <div class="zh">偷能 ne-ge 那 or-me um-chu-li-ji 阿努勒</div>
+            <div class="kr">날 담기엔 벅찬 My youth</div>
+            <div class="jp">ナル タムギエン ポクチャン My youth</div>
+            <div class="en">Nal damgien beokchan My youth</div>
+            <div class="zh">那 黨gi-en po-chan My youth</div>
         </div>
         <div class="line-box">
-            <div class="kr">오직 날 위한 background 나 홀로 서 난</div>
-            <div class="jp">オジク ナル ウィハン background ナ ホルロ ソ ナン</div>
-            <div class="en">Ojik nal wihan background na hollo seo nan</div>
-            <div class="zh">偶基 那 wi-han background 那 ho-lo 搜 難</div>
+            <div class="kr">더는 네게 날 얽매</div>
+            <div class="jp">トヌン ネゲ ナル オルメ</div>
+            <div class="en">Deoneun nege nal eolkmae</div>
+            <div class="zh">偷能 ne-ge 那 or-me</div>
         </div>
         <div class="line-box">
-            <div class="kr">내겐 오직 나만 주인공인 drama</div>
-            <div class="jp">ネゲン オジク ナマン チュインゴンイン drama</div>
-            <div class="en">Naegen ojik naman juingongin drama</div>
-            <div class="zh">ne-gen 偶基 那曼 朱茵公茵 drama</div>
+            <div class="kr">움츠리지 않을래</div>
+            <div class="jp">ウムチュリジ アヌルレ</div>
+            <div class="en">umcheuriji aneullae</div>
+            <div class="zh">阿努勒</div>
         </div>
         <div class="line-box">
-            <div class="kr">날 울린대도 that's my happy end</div>
-            <div class="jp">ナル ウルリンデド that's my happy end</div>
-            <div class="en">Nal ullindaedo that's my happy end</div>
-            <div class="zh">那 烏林de-do that's my happy end</div>
+            <div class="kr">오직 날 위한 Back ground</div>
+            <div class="jp">オジク ナル ウィハン Back ground</div>
+            <div class="en">Ojik nal wihan Back ground</div>
+            <div class="zh">偶基 那 wi-han Back ground</div>
+        </div>
+        <div class="line-box">
+            <div class="kr">나 홀로 서 난</div>
+            <div class="jp">ナ ホルロ ソ ナン</div>
+            <div class="en">na hollo seo nan</div>
+            <div class="zh">那 ho-lo 搜 難</div>
+        </div>
+        <div class="line-box">
+            <div class="kr">내겐 오직 <span class="cheer">나만</span></div>
+            <div class="jp">ネゲン オジク <span class="cheer">ナマン</span></div>
+            <div class="en">Naegen ojik <span class="cheer">naman</span></div>
+            <div class="zh">ne-gen 偶基 <span class="cheer">(那忙)</span></div>
+        </div>
+        <div class="line-box">
+            <div class="kr">주인공인 <span class="cheer">Drama</span></div>
+            <div class="jp">チュインゴンイン <span class="cheer">Drama</span></div>
+            <div class="en">juingongin <span class="cheer">Drama</span></div>
+            <div class="zh">朱茵公茵 <span class="cheer">Drama</span></div>
+        </div>
+        <div class="line-box">
+            <div class="kr">날 울린대도 <span class="cheer">That ma Happy End</span></div>
+            <div class="jp">ナル ウルリンデド <span class="cheer">That ma Happy End</span></div>
+            <div class="en">Nal ullindaedo <span class="cheer">That ma Happy End</span></div>
+            <div class="zh">那 烏林de-do <span class="cheer">That ma Happy End</span></div>
         </div>
 
         <div class="section-title">Outro</div>
         <div class="line-box">
-            <div class="kr">완벽한 <span class="cheer">Goodbye</span></div>
-            <div class="jp">ワンビョカン <span class="cheer">Goodbye</span></div>
-            <div class="en">Wanbyeokhan <span class="cheer">Goodbye</span></div>
-            <div class="zh">萬pyo-坎 <span class="cheer">Goodbye</span></div>
+            <div class="kr">완벽한 Goodbye <span class="cheer">(Bye)</span></div>
+            <div class="jp">ワンビョカン Goodbye <span class="cheer">(Bye)</span></div>
+            <div class="en">Wanbyeokhan Goodbye <span class="cheer">(Bye)</span></div>
+            <div class="zh">萬pyo-坎 Goodbye <span class="cheer">(Bye)</span></div>
         </div>
         <div class="line-box">
-            <div class="kr">Don't give me those <span class="cheer">sad eyes</span></div>
-            <div class="jp">Don't give me those <span class="cheer">sad eyes</span></div>
-            <div class="en">Don't give me those <span class="cheer">sad eyes</span></div>
-            <div class="zh">Don't give me those <span class="cheer">sad eyes</span></div>
+            <div class="kr">Don’t give me those sad eyes <span class="cheer">(Eyes)</span></div>
+            <div class="jp">Don’t give me those sad eyes <span class="cheer">(Eyes)</span></div>
+            <div class="en">Don’t give me those sad eyes <span class="cheer">(Eyes)</span></div>
+            <div class="zh">Don’t give me those sad eyes <span class="cheer">(Eyes)</span></div>
         </div>
         <div class="line-box">
-            <div class="kr">잠 못 드는 <span class="cheer">good night (oh)</span></div>
-            <div class="jp">チャム モッ トゥヌン <span class="cheer">good night (oh)</span></div>
-            <div class="en">Jam mot deuneun <span class="cheer">good night (oh)</span></div>
-            <div class="zh">查 mot 杜能 <span class="cheer">good night (oh)</span></div>
+            <div class="kr">잠 못 드는 Good night</div>
+            <div class="jp">チャム モッ トゥヌン Good night</div>
+            <div class="en">Jam mot deuneun Good night</div>
+            <div class="zh">查 mot 杜能 Good night</div>
         </div>
         <div class="line-box">
-            <div class="kr">눈부신 순간이 가득해, 상처받아도 <span class="cheer">I like it</span></div>
-            <div class="jp">ヌンブシン スンガニ カドゥケ, サンチョバダド <span class="cheer">I like it</span></div>
-            <div class="en">Nunbusin sungani gadeukhae, sangcheobadado <span class="cheer">I like it</span></div>
-            <div class="zh">怒不信 孫嘎你 嘎督K, 桑秋八打多 <span class="cheer">I like it</span></div>
+            <div class="kr">눈부신 순간이 가득해</div>
+            <div class="jp">ヌンブシン スンガニ カドゥケ</div>
+            <div class="en">Nunbusin sungani gadeukhae</div>
+            <div class="zh">怒不信 孫嘎你 嘎督K</div>
         </div>
         <div class="line-box">
-            <div class="kr"><span class="cheer">Goodbye</span></div>
-            <div class="jp"><span class="cheer">Goodbye</span></div>
-            <div class="en"><span class="cheer">Goodbye</span></div>
-            <div class="zh"><span class="cheer">Goodbye</span></div>
+            <div class="kr"><span class="cheer">상처받아도 I like it</span></div>
+            <div class="jp"><span class="cheer">サンチョバダド I like it</span></div>
+            <div class="en"><span class="cheer">sangcheobadado I like it</span></div>
+            <div class="zh"><span class="cheer">(桑糾八搭豆 I like it)</span></div>
         </div>
         <div class="line-box">
-            <div class="kr">I don't need more <span class="cheer">sweet lie (yeah)</span></div>
-            <div class="jp">I don't need more <span class="cheer">sweet lie (yeah)</span></div>
-            <div class="en">I don't need more <span class="cheer">sweet lie (yeah)</span></div>
-            <div class="zh">I don't need more <span class="cheer">sweet lie (yeah)</span></div>
+            <div class="kr">Goodbye</div>
+            <div class="jp">Goodbye</div>
+            <div class="en">Goodbye</div>
+            <div class="zh">Goodbye</div>
         </div>
         <div class="line-box">
-            <div class="kr">지금, 이 확신을 믿어 난 또 두근대</div>
-            <div class="jp">チグム, イ フワクシヌル ミド ナン ット トゥグンデ</div>
-            <div class="en">Jigeum, i hwaksineul mideo nan tto dugeundae</div>
-            <div class="zh">基跟, 宜 hwa-xin-eul me-do 難 偷 杜跟de</div>
+            <div class="kr">I don’t need more Sweet lie</div>
+            <div class="jp">I don’t need more Sweet lie</div>
+            <div class="en">I don’t need more Sweet lie</div>
+            <div class="zh">I don’t need more Sweet lie</div>
+        </div>
+        <div class="line-box">
+            <div class="kr">지금 이 확신을 믿어 난</div>
+            <div class="jp">チグム イ フワクシヌル ミド ナン</div>
+            <div class="en">Jigeum i hwaksineul mideo nan</div>
+            <div class="zh">基跟 宜 hwa-xin-eul me-do 難</div>
+        </div>
+        <div class="line-box">
+            <div class="kr">또 두근대</div>
+            <div class="jp">ット トゥグンデ</div>
+            <div class="en">tto dugeundae</div>
+            <div class="zh">偷 杜跟de</div>
+        </div>
+        <div class="line-box">
+            <div class="kr">평범한 하루도</div>
+            <div class="jp">ピョンボマン ハルド</div>
+            <div class="en">Pyeongbeomhan harudo</div>
+            <div class="zh">pyong-bom-han 哈魯多</div>
+        </div>
+        <div class="line-box">
+            <div class="kr">느낀 대로 이어가면 돼</div>
+            <div class="jp">ヌッキン デロ イオガミョン デ</div>
+            <div class="en">neukkin daero ieogamyeon dwae</div>
+            <div class="zh">怒ㄍㄧㄣ de-ro 宜歐嘎謬 dwe</div>
         </div>
         
         <div class="line-box" style="border: 2px solid var(--accent); border-radius: 16px;">
-            <div class="kr">평범한 하루도 느낀 대로 이어가면 돼 <span class="cheer">(문별동별! 완벽했다!)</span></div>
-            <div class="jp">ピョンボマン ハルド ヌッキン デロ イオガミョン デ <span class="cheer">(ムンビョル トンビョル！ ワンビョケッタ！)</span></div>
-            <div class="en">Pyeongbeomhan harudo neukkin daero ieogamyeon dwae <span class="cheer">(Moon Byul Dong Byul! Wan Byeok Hae Tta!)</span></div>
-            <div class="zh">pyong-bom-han 哈魯多 怒ㄍㄧㄣ de-ro 宜歐嘎謬 dwe <span class="cheer">(文星東星！完壁K搭！)</span></div>
+            <div class="kr"><span class="cheer">(문!별!똥!별!)</span></div>
+            <div class="jp"><span class="cheer">(ムン！ビョル！トン！ビョル！)</span></div>
+            <div class="en"><span class="cheer">(Moon! Byul! Dong! Byul!)</span></div>
+            <div class="zh"><span class="cheer">(文! 星! 東! 星!)</span></div>
+            <span class="note">⚠️ Ending Pose! \ SCREAM /</span>
         </div>
-        <div class="footer"></div>
+        <div class="footer">Create for moonbyul's atm</div>
     </div>
 
     <script src="menu.js"></script>
