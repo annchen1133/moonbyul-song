@@ -5,43 +5,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Memories - Moon Byul</title>
     <style>
-        /* --- [laundri] 앨범 스타일 배색 --- */
+        /* --- [laundri] 專輯配色設定 --- */
         :root {
-            --bg-color: #f0f4f8;       /* 연한 그레이 블루 */
-            --text-color: #2d3436;     /* 짙은 회색 */
+            --bg-color: #f0f4f8;       /* 淺灰藍 */
+            --text-color: #2d3436;     /* 深灰 */
             --bar-bg: rgba(255, 255, 255, 0.90);
-            --accent: #FF6B35;         /* 활기찬 오렌지 */
-            --fab-bg: #4DA1FF;         /* 스카이 블루 */
+            --accent: #FF6B35;         /* 活力橙 */
+            --fab-bg: #4DA1FF;         /* 天空藍 */
             --fab-text: #ffffff;
             --menu-bg: #ffffff;
             --shadow: 0 8px 20px rgba(77, 161, 255, 0.2);
-            /* 언어별 색상 */
-            --highlight-color: #d32f2f; /* 일본어 (빨강) */
-            --eng-color: #2e7d32;       /* 영어 (초록) */
-            --zh-color: #e65100;        /* 중국어 (주황) */
+            /* 語言顏色 */
+            --highlight-color: #d32f2f; /* 日 (紅) */
+            --eng-color: #2e7d32;       /* 英 (綠) */
+            --zh-color: #e65100;        /* 中 (橘) */
         }
         body.dark-mode {
-            --bg-color: #101820;       /* 딥 데님 */
-            --text-color: #dfe6e9;     /* 회백색 */
+            --bg-color: #101820;       /* 深丹寧 */
+            --text-color: #dfe6e9;     /* 灰白 */
             --bar-bg: rgba(16, 24, 32, 0.95);
             --accent: #FF9F43;
             --fab-bg: #2e86de;
             --fab-text: #ffffff;
             --menu-bg: #1e272e;
             --shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
-            /* 다크 모드 언어 색상 */
+            /* 深色模式下的語言顏色 */
             --highlight-color: #ffeb3b;
             --eng-color: #69f0ae;
             --zh-color: #ffab91;
         }
         body {
             background-color: var(--bg-color); color: var(--text-color);
-            font-family: -apple-system, sans-serif;
+            font-family: "Microsoft JhengHei", "微軟正黑體", -apple-system, sans-serif;
             margin: 0; padding: 0; transition: 0.4s ease;
             padding-bottom: 120px; padding-top: 80px; 
         }
 
-        /* 상단 바 */
+        /* 頂部列 */
         .top-bar {
             position: fixed; top: 0; left: 0; right: 0; height: 64px;
             background-color: var(--bar-bg); backdrop-filter: blur(12px);
@@ -56,7 +56,7 @@
         }
         .chip.active { background-color: var(--accent); color: #fff; opacity: 1; box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
 
-        /* 본문 영역 */
+        /* 內容區 */
         .content { padding: 24px; text-align: center; line-height: 1.8; max-width: 600px; margin: 0 auto; }
         .song-title { margin: 0 0 40px 0; font-size: 28px; color: var(--text-color); letter-spacing: -0.5px; font-weight: 800; }
         
@@ -67,7 +67,7 @@
         body.dark-mode .line-box { background: rgba(255,255,255,0.05); }
 
         .kr { font-size: 19px; font-weight: 700; margin-bottom: 4px; display: block; }
-        /* 언어 전환 로직 */
+        /* 語言切換邏輯 */
         .jp { color: var(--highlight-color); display: block; }
         .en, .zh { display: none; }
         .en { color: var(--eng-color); font-family: monospace; font-weight: bold; }
@@ -77,7 +77,7 @@
         .note { font-size: 12px; color: var(--accent); margin-top: 5px; display: block; opacity: 0.8; }
         .section-title { margin-top: 40px; color: var(--text-color); opacity: 0.5; font-size: 12px; text-transform: uppercase; letter-spacing: 2px; display: inline-block; margin-bottom: 20px; border-bottom: 1px dashed var(--accent); padding-bottom: 5px;}
 
-        /* FAB & Menu (menu.js에서 사용) */
+        /* FAB & Menu (menu.js用) */
         .fab-container { position: fixed; bottom: 32px; left: 24px; z-index: 200; }
         .fab-btn {
             width: 64px; height: 64px; border-radius: 24px;
@@ -127,43 +127,43 @@
             <div class="kr">지금부터 시작해 <span class="cheer">(함성!)</span></div>
             <div class="jp">チグムブト シジャケ <span class="cheer">(歓声！)</span></div>
             <div class="en">Jigeumbuteo sijakhae <span class="cheer">(Scream!)</span></div>
-            <div class="zh">機跟不偷 吸家K <span class="cheer">(尖叫!)</span></div>
+            <div class="zh">七跟補偷 洗加K <span class="cheer">(尖叫!)</span></div>
         </div>
         <div class="line-box">
             <div class="kr">간절한 마음을 담아</div>
             <div class="jp">カンジョラン マウムル タマ</div>
             <div class="en">Ganjeolhan maeumeul dama</div>
-            <div class="zh">甘鳩蘭 媽恩悶 塔馬</div>
+            <div class="zh">乾揪懶 媽恩悶 打馬</div>
         </div>
         <div class="line-box">
             <div class="kr">추억이란 두 글자를 써줄게</div>
             <div class="jp">チュオギラン トゥ クルチャルル ソジュルケ</div>
             <div class="en">Chueogiran du geuljareul sseojulge</div>
-            <div class="zh">廚歐gi-lan 杜 葛家日 搜ju-ge</div>
+            <div class="zh">粗偶gi藍 吐 ㄍ甲了 搜朱給</div>
         </div>
         <div class="line-box">
             <div class="kr">어떤 단어로도 표현할 수 없는</div>
             <div class="jp">オットン タノロド ピョヒョナル ス オムヌン</div>
             <div class="en">Eotteon daneorodo pyohyeonhal su eopneun</div>
-            <div class="zh">歐凍 達no-ro-do pyo-hyon-hal 蘇 歐能</div>
+            <div class="zh">偶冬 攤耨摟兜 飄“ㄏㄧ翁”哈 蘇 歐能</div>
         </div>
         <div class="line-box">
             <div class="kr">너와 나의 그 많은 시간들을 기억해 <span class="cheer">(기.억.할.게!)</span></div>
             <div class="jp">ノワ ナエ ク マヌン シガンドゥルル キオケ <span class="cheer">(キ・オ・カル・ケ！)</span></div>
             <div class="en">Neowa naui geu maneun sigandeureul gieokhae <span class="cheer">(Gi.Eok.Hal.Ge!)</span></div>
-            <div class="zh">no-wa 那e 可 媽能 吸桿de-leul gi-o-ke <span class="cheer">(記.得.你!)</span></div>
+            <div class="zh">耨瓦 那欸 ㄎ 媽能 席乾的了 gi喲K <span class="cheer">(gi.噢.喀.gay!)</span></div>
         </div>
         <div class="line-box">
             <div class="kr">쉼 없이 뛰던 내 어린 시절은</div>
             <div class="jp">スィム オプシ トゥィドン ネ オリン シジョルン</div>
             <div class="en">Swim eopsi ttwideon nae eorin sijeoreun</div>
-            <div class="zh">swim 歐西 dwi-don ne 歐林 吸鳩潤</div>
+            <div class="zh">需 某西 堆懂 內 偶林 吸揪稜</div>
         </div>
         <div class="line-box">
             <div class="kr">너로 인해 그렇게 반짝여가</div>
             <div class="jp">ノロ イネ クロケ パンチャギョガ</div>
             <div class="en">Neoro inhae geureoke banjjagyeoga</div>
-            <div class="zh">no-ro 宜ne 可羅ke 潘雜gyo-ga</div>
+            <div class="zh">耨摟 wi餒 ㄎ漏K 把甲ㄍㄧㄡ嘎</div>
         </div>
 
         <div class="section-title">Pre-Chorus</div>
@@ -171,13 +171,13 @@
             <div class="kr">한 송이의 꽃잎처럼 점점 피어나</div>
             <div class="jp">ハン ソンイエ ッコニプチョロム チョムジョム ピオナ</div>
             <div class="en">Han songiui kkonnipcheoreom jeomjeom pieona</div>
-            <div class="zh">韓 松伊e 勾nip-cho-rom 炯炯 p-o-na</div>
+            <div class="zh">韓 松伊欸 狗你秋攏 炯炯 屁歐哪</div>
         </div>
         <div class="line-box">
             <div class="kr">커다란 향기가 되어 네 곁에 맴돌면</div>
             <div class="jp">コダラン ヒャンギガ テオ ニ キョテ メムドルミョン</div>
             <div class="en">Keodaran hyanggiga doeeo ne gyeote maemdolmyeon</div>
-            <div class="zh">可達蘭 hyang-gi-ga dwe-o ne gyo-te mem-dol-myon</div>
+            <div class="zh">摳塔蘭 “ㄏㄧㄤ”gi嘎 退歐 妳 gyoㄊㄟ mem嘟謬</div>
         </div>
 
         <div class="section-title">Chorus</div>
@@ -185,31 +185,31 @@
             <div class="kr"><span class="cheer">In the end 너에게</span></div>
             <div class="jp"><span class="cheer">In the end ノエゲ</span></div>
             <div class="en"><span class="cheer">In the end neoege</span></div>
-            <div class="zh"><span class="cheer">In the end no-e-ge</span></div>
+            <div class="zh"><span class="cheer">In the end 耨A給</span></div>
         </div>
         <div class="line-box">
             <div class="kr"><span class="cheer">나의 모든 걸 물들일게</span></div>
             <div class="jp"><span class="cheer">ナエ モドゥン ゴル ムルドゥリルケ</span></div>
             <div class="en"><span class="cheer">Naui modeun geol muldeurilge</span></div>
-            <div class="zh"><span class="cheer">那e 摸敦 勾 mul-de-lil-ge</span></div>
+            <div class="zh"><span class="cheer">哪耶 某登 勾 木的哩給</span></div>
         </div>
         <div class="line-box">
             <div class="kr">아직은 굳이 완벽하지 않아도 되잖아</div>
             <div class="jp">アジグン クジ ワンビョカジ アナド デジャナ</div>
             <div class="en">Ajigeun guji wanbyeokhaji anado doejana</div>
-            <div class="zh">阿基跟 古基 萬byo-ka-ji 阿那多 dwe-ja-na</div>
+            <div class="zh">阿基跟 哭幾 萬byo卡幾 阿哪兜 堆夾哪</div>
         </div>
         <div class="line-box">
-            <div class="kr">이렇게 나 너에게</div>
-            <div class="jp">イロケ ナ ノエゲ</div>
-            <div class="en">Ireoke na neoege</div>
-            <div class="zh">宜羅ke 那 no-e-ge</div>
+            <div class="kr"><span class="cheer">이렇게</span> 나 너에게</div>
+            <div class="jp"><span class="cheer">イロケ</span> ナ ノエゲ</div>
+            <div class="en"><span class="cheer">Ireoke</span> na neoege</div>
+            <div class="zh"><span class="cheer">宜摟K</span> 哪 耨A給</div>
         </div>
         <div class="line-box">
-            <div class="kr">점점 아낌없이 모든 걸 줄 테니</div>
-            <div class="jp">チョムジョム アッキモプシ モドゥン ゴル チュル テニ</div>
-            <div class="en">Jeomjeom akkimeopsi modeun geol jul teni</div>
-            <div class="zh">炯炯 阿gim-o-si 摸敦 勾 jul te-ni</div>
+            <div class="kr"><span class="cheer">점점</span> 아낌없이 모든 걸 줄 테니</div>
+            <div class="jp"><span class="cheer">チョムジョム</span> アッキモプシ モドゥン ゴル チュル テニ</div>
+            <div class="en"><span class="cheer">Jeomjeom</span> akkimeopsi modeun geol jul teni</div>
+            <div class="zh"><span class="cheer">炯炯</span> ki某西 某燈 勾 啾 ㄊㄟˋ尼</div>
         </div>
         <div class="line-box">
             <div class="kr">If you want me</div>
@@ -218,10 +218,10 @@
             <div class="zh">If you want me</div>
         </div>
         <div class="line-box">
-            <div class="kr">내 전부를 너에게</div>
-            <div class="jp">ネ チョンブル ノエゲ</div>
-            <div class="en">Nae jeonbureul neoege</div>
-            <div class="zh">ne 炯布日 no-e-ge</div>
+            <div class="kr"><span class="cheer">내 전부를 너에게</span></div>
+            <div class="jp"><span class="cheer">ネ チョンブル ノエゲ</span></div>
+            <div class="en"><span class="cheer">Nae jeonbureul neoege</span></div>
+            <div class="zh"><span class="cheer">內 炯不 漏A給</span></div>
         </div>
 
         <div class="section-title">Verse 2</div>
@@ -229,25 +229,25 @@
             <div class="kr">우리 함께한 그 많은 시간은</div>
             <div class="jp">ウリ ハムッケハン ク マヌン シガヌン</div>
             <div class="en">Uri hamkkehan geu maneun siganeun</div>
-            <div class="zh">屋裡 航給罕 可 媽能 吸桿能</div>
+            <div class="zh">屋哩 憨給憨 ㄎ 媽能 席甘能</div>
         </div>
         <div class="line-box">
             <div class="kr">끝이 아닌 시작일 테니 우린 기억해</div>
             <div class="jp">ックチ アニン シジャギル テニ ウリン キオケ</div>
             <div class="en">Kkeuchi anin sijagil teni urin gieokhae</div>
-            <div class="zh">個七 阿寧 吸家gil te-ni 屋林 gi-o-ke</div>
+            <div class="zh">哥七 阿寧 吸家gil ㄊㄟˋ尼 霧林 gi偶K</div>
         </div>
         <div class="line-box">
             <div class="kr">멈출 수 없는 내 지금 순간은</div>
             <div class="jp">モムチュル ス オムヌン ネ チグム スンガヌン</div>
             <div class="en">Meomchul su eopneun nae jigeum sunganeun</div>
-            <div class="zh">夢出 蘇 歐能 ne 基跟 孫甘能</div>
+            <div class="zh">猛粗 蘇 歐能 內 七跟 孫甘能</div>
         </div>
         <div class="line-box">
             <div class="kr">너로 인해 그렇게 반짝여가</div>
-            <div class="jp">ノロ イネ クロケ パンチャギョガ</div>
+            <div class="jp">ノ로 イネ クロケ パンチャギョガ</div>
             <div class="en">Neoro inhae geureoke banjjagyeoga</div>
-            <div class="zh">no-ro 宜ne 可羅ke 潘雜gyo-ga</div>
+            <div class="zh">耨摟 wi餒 ㄎ漏K 把甲ㄍㄧㄡ嘎</div>
         </div>
 
         <div class="section-title">Pre-Chorus</div>
@@ -261,25 +261,25 @@
             <div class="kr">지금 이 순간이</div>
             <div class="jp">チグム イ スンガニ</div>
             <div class="en">Jigeum i sungani</div>
-            <div class="zh">基跟 宜 孫甘妳</div>
+            <div class="zh">七跟 咪 孫甘尼</div>
         </div>
         <div class="line-box">
             <div class="kr">다신 오지 않을 시간일 테니까 우린</div>
             <div class="jp">タシン オジ アヌル シガニル テニッカ ウリン</div>
             <div class="en">Dasin oji aneul siganil tenikka urin</div>
-            <div class="zh">塔信 歐基 阿努 吸桿宜 te-ni-ka 屋林</div>
+            <div class="zh">塔席 歐基 阿呢 席乾尼 ㄊㄟˋ妳嘎 烏林</div>
         </div>
         <div class="line-box">
             <div class="kr">모든 장면들을</div>
             <div class="jp">モドゥン チャンミョンドゥルル</div>
             <div class="en">Modeun jangmyeondeureul</div>
-            <div class="zh">摸敦 張myon-de-leul</div>
+            <div class="zh">某登 張謬的ㄌ</div>
         </div>
         <div class="line-box">
             <div class="kr">가슴 깊이 새겨놓아 영원히</div>
             <div class="jp">カスム キピ セギョノア ヨンウォニ</div>
             <div class="en">Gaseum gipi saegyeonoa yeongwonhi</div>
-            <div class="zh">嘎森 gi-pi se-gyo-no-ah 雍翁hee</div>
+            <div class="zh">卡森 gi痞 誰ㄍㄧㄡno瓦 擁窩尼</div>
         </div>
 
         <div class="section-title">Chorus</div>
@@ -287,31 +287,31 @@
             <div class="kr"><span class="cheer">In the end 너에게</span></div>
             <div class="jp"><span class="cheer">In the end ノエゲ</span></div>
             <div class="en"><span class="cheer">In the end neoege</span></div>
-            <div class="zh"><span class="cheer">In the end no-e-ge</span></div>
+            <div class="zh"><span class="cheer">In the end 耨A給</span></div>
         </div>
         <div class="line-box">
             <div class="kr"><span class="cheer">나의 모든 걸 물들일게</span></div>
             <div class="jp"><span class="cheer">ナエ モドゥン ゴル ムルドゥリルケ</span></div>
             <div class="en"><span class="cheer">Naui modeun geol muldeurilge</span></div>
-            <div class="zh"><span class="cheer">那e 摸敦 勾 mul-de-lil-ge</span></div>
+            <div class="zh"><span class="cheer">哪耶 某登 勾 木的哩給</span></div>
         </div>
         <div class="line-box">
             <div class="kr">아직은 굳이 완벽하지 않아도 되잖아</div>
             <div class="jp">アジグン クジ ワンビョカジ アナド デジャナ</div>
             <div class="en">Ajigeun guji wanbyeokhaji anado doejana</div>
-            <div class="zh">阿基跟 古基 萬byo-ka-ji 阿那多 dwe-ja-na</div>
+            <div class="zh">阿基跟 哭幾 萬byo卡幾 阿哪兜 堆夾哪</div>
         </div>
         <div class="line-box">
-            <div class="kr">이렇게 나 너에게</div>
-            <div class="jp">イロケ ナ ノエゲ</div>
-            <div class="en">Ireoke na neoege</div>
-            <div class="zh">宜羅ke 那 no-e-ge</div>
+            <div class="kr"><span class="cheer">이렇게</span> 나 너에게</div>
+            <div class="jp"><span class="cheer">イロケ</span> ナ ノエゲ</div>
+            <div class="en"><span class="cheer">Ireoke</span> na neoege</div>
+            <div class="zh"><span class="cheer">宜摟K</span> 哪 耨A給</div>
         </div>
         <div class="line-box">
-            <div class="kr">점점 아낌없이 모든 걸 줄 테니</div>
-            <div class="jp">チョムジョム アッキモプシ モドゥン ゴル チュル テニ</div>
-            <div class="en">Jeomjeom akkimeopsi modeun geol jul teni</div>
-            <div class="zh">炯炯 阿gim-o-si 摸敦 勾 jul te-ni</div>
+            <div class="kr"><span class="cheer">점점</span> 아낌없이 모든 걸 줄 테니</div>
+            <div class="jp"><span class="cheer">チョムジョム</span> アッキモプシ モドゥン ゴル チュル テニ</div>
+            <div class="en"><span class="cheer">Jeomjeom</span> akkimeopsi modeun geol jul teni</div>
+            <div class="zh"><span class="cheer">炯炯</span> ki某西 某燈 勾 啾 ㄊㄟˋ尼</div>
         </div>
         <div class="line-box">
             <div class="kr">If you want me</div>
@@ -320,10 +320,10 @@
             <div class="zh">If you want me</div>
         </div>
         <div class="line-box">
-            <div class="kr">내 전부를 너에게</div>
-            <div class="jp">ネ チョンブル ノエゲ</div>
-            <div class="en">Nae jeonbureul neoege</div>
-            <div class="zh">ne 炯布日 no-e-ge</div>
+            <div class="kr"><span class="cheer">내 전부를 너에게</span></div>
+            <div class="jp"><span class="cheer">ネ チョンブル ノエゲ</span></div>
+            <div class="en"><span class="cheer">Nae jeonbureul neoege</span></div>
+            <div class="zh"><span class="cheer">內 炯不 漏A給</span></div>
         </div>
         
         <div class="line-box" style="border: 2px solid var(--accent); border-radius: 16px;">
@@ -333,7 +333,7 @@
             <div class="zh"><span class="cheer">永遠在一起吧 文星伊！</span></div>
             <span class="note">⚠️ Ending Message!</span>
         </div>
-        <div class="footer"></div>
+        <div class="footer">Create for moonbyul's atm</div>
     </div>
 
     <script src="menu.js"></script>
