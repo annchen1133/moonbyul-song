@@ -45,10 +45,47 @@ function injectAppMeta() {
 injectAppMeta();
 
 // ==========================================
-// 2. 自動加入回首頁按鈕 & 更新 Footer
+// 2. 核心功能：記住日夜模式 & 自動切換中文
 // ==========================================
 document.addEventListener('DOMContentLoaded', () => {
-    // 2-1. 回首頁按鈕
+    
+    // --- 功能 A: 記住日夜模式 ---
+    // 1. 檢查之前有沒有存過設定
+    const savedTheme = localStorage.getItem('theme');
+    const themeBtn = document.querySelector('.theme-toggle');
+    
+    // 2. 如果之前是暗黑模式，立刻切換過去
+    if (savedTheme === 'dark') {
+        document.body.classList.add('dark-mode');
+        if(themeBtn) themeBtn.textContent = '🌙';
+    }
+
+    // 3. 監聽按鈕點擊，隨時更新儲存的狀態
+    if (themeBtn) {
+        themeBtn.addEventListener('click', () => {
+            // 這裡不需要寫切換邏輯，因為 HTML 裡的 toggleTheme 已經會做切換
+            // 我們只需要負責「紀錄」就好
+            setTimeout(() => { // 稍微延遲確保 class 已經變更
+                if (document.body.classList.contains('dark-mode')) {
+                    localStorage.setItem('theme', 'dark'); // 存成暗黑
+                } else {
+                    localStorage.setItem('theme', 'light'); // 存成亮色
+                }
+            }, 50);
+        });
+    }
+
+    // --- 功能 B: 自動切換成中文空耳 ---
+    // 透過模擬點擊「中文」按鈕來達成
+    const zhBtn = document.getElementById('btn-zh');
+    if (zhBtn) {
+        // 使用 setTimeout 確保頁面載入後執行，避免衝突
+        setTimeout(() => {
+            zhBtn.click(); 
+        }, 100);
+    }
+
+    // --- 功能 C: 自動加入回首頁按鈕 ---
     const currentFile = window.location.pathname.split("/").pop();
     if (currentFile !== "index.html" && currentFile !== "" && !document.querySelector('.home-btn')) {
         const topBar = document.querySelector('.top-bar');
@@ -58,21 +95,16 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // 2-2. 更新 Footer
+    // --- 功能 D: 更新 Footer ---
     const footer = document.querySelector('.footer');
     if (footer) {
         footer.innerHTML = `
-            <p style="font-size: 10px; font-weight: bold;">
-            <br>
-            Create for Moonbyul & Shooting Star <br>
-            Hope everyone enjoys the concert to the fullest!<br>
-            </p>
-            <br>
+            <p style="margin-bottom: 10px; font-weight: bold;">Create for 문별&별똥별</p>
             <p style="font-size: 10px; opacity: 0.6; line-height: 1.6; margin: 0;">
-                本網站為粉絲自製，內容僅供個人學習與應援使用，<br>
+                本網站為粉絲自製，非官方應用程式。<br>
+                內容僅供個人學習與應援使用，<br>
                 嚴禁商業用途或未經授權的修改與轉載。<br>
-                製作 @moonstaratm999<br>
-                中文空耳協作 @only_mamoo_1118<br>
+                (空耳部分由 Gemini 協助製作)
             </p>
         `;
     }
